@@ -6,65 +6,81 @@ import org.academiadecodigo.tropadelete.tropanoid.Direction;
 
 public class Paddle extends GameObjects {
 
-    private int width;
-    private int height;
-    private Rectangle[] paddle;
+    private static final int WIDTH = 50;
+    private static final int HEIGHT = 5;
+    private Rectangle paddle;
     private Direction direction;
+    private int positionX;
+    private int positionY;
 
     public Paddle() {
 
-        width = 10;
-        height = 5;
+        positionX = Board.getWIDTH() / 2 - WIDTH / 2;
+        positionY = Board.getHEIGHT();
 
-        int centerZero = Board.getWIDTH() / 2 - (width / 2);
-        int leftZero = centerZero - width;
-        int rightZero = centerZero + width;
-
-        Rectangle paddleCenter = new Rectangle(centerZero, Board.getHEIGHT(), width, height);
-        Rectangle paddleLeft = new Rectangle(leftZero, Board.getHEIGHT(), width, height);
-        Rectangle paddleRight = new Rectangle(rightZero, Board.getHEIGHT(), width, height);
-
-        paddle = new Rectangle[3];
-        paddle[0] = paddleLeft;
-        paddle[1] = paddleCenter;
-        paddle[2] = paddleRight;
+        this.paddle = new Rectangle(positionX, positionY, WIDTH, HEIGHT);
 
         show();
     }
 
     public void show() {
-        paddle[0].fill();
-        paddle[1].fill();
-        paddle[2].fill();
+        paddle.fill();
     }
 
     public void move() throws InterruptedException {
 
+
+
         if (direction == Direction.LEFT) {
+            paddle.translate(-10, 0);
 
-            if (paddle[0].getX() <= Board.PADDING) {
-                return;
+            if (paddle.getX() <= Board.PADDING) {
+                paddle.translate(10, 0);
             }
-
-            paddle[0].translate(-1, 0);
-            paddle[1].translate(-1, 0);
-            paddle[2].translate(-1, 0);
-            Thread.sleep(2);
+            this.positionX=paddle.getX();
         }
         if (direction == Direction.RIGHT) {
-
-            if (paddle[2].getX() >= Board.getWIDTH()) {
-                return;
+            paddle.translate(10, 0);
+            if (paddle.getX()+ WIDTH >= Board.getWIDTH()) {
+                paddle.translate(-10,0);
             }
+            this.positionX=paddle.getX();
+        }
 
-            paddle[0].translate(1, 0);
-            paddle[1].translate(1, 0);
-            paddle[2].translate(1, 0);
-            Thread.sleep(2);
+        /*if (direction == Direction.LEFT && paddle.getX() > Board.PADDING) {
+            paddle.translate(-10, 0);
+
+            Thread.sleep(1);
+        }
+        if (direction == Direction.RIGHT && paddle.getX() + WIDTH < Board.getWIDTH()) {
+            paddle.translate(10, 0);
+
+            Thread.sleep(1);
         }
         if (direction == null) {
 
+        }*/
+       /* if (direction == Direction.LEFT) {
+
+            if (paddle.getX() <= Board.PADDING) {
+                return;
+            }
+
+            paddle.translate(-10, 0);
+
         }
+        if (direction == Direction.RIGHT) {
+
+            if (paddle.getX()+ WIDTH >= Board.getWIDTH()) {
+                return;
+            }
+
+            paddle.translate(10, 0);
+        }
+        if (direction == null) {
+
+        }*/
+        Thread.sleep(1);
         show();
     }
 
@@ -78,7 +94,19 @@ public class Paddle extends GameObjects {
         return direction;
     }
 
-    public Rectangle[] getPaddle() {
+    public Rectangle getPaddle() {
         return paddle;
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public int getWIDTH() {
+        return WIDTH;
     }
 }

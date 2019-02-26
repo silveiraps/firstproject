@@ -19,9 +19,7 @@ public class Board {
         grid.draw();
         this.paddle = new Paddle();
         this.ball = new Ball();
-        this.collision = new Collision(ball)
-
-
+        this.collision = new Collision(ball,paddle);
     }
 
     public void start() {
@@ -30,6 +28,7 @@ public class Board {
             try {
                 paddle.move();
                 ball.move();
+                collision.check();
               //  System.out.println(ball.getPositionX()+" "+ball.getPositionY());
             } catch (InterruptedException e) {
             }

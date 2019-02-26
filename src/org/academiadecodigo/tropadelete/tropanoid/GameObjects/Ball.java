@@ -43,17 +43,18 @@ public class Ball extends GameObjects {
             speedY = -speedY;
         }
 
-        positionX += 2 * speedX;
-        positionY += 2 * speedY;
+        positionX +=  speedX;
+        positionY +=  speedY;
 
 
         ball.translate(positionX - prevPosX, positionY - prevPosY);
-
+        positionX = positionX - prevPosX;
+        positionY = positionY - prevPosY;
 
         show();
 
 
-        Thread.sleep(50);
+        Thread.sleep(5);
         // System.out.println("x"+positionX);
         // System.out.println("y"+positionY);
     }

@@ -1,16 +1,15 @@
 package org.academiadecodigo.tropadelete.tropanoid;
 
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
-
-import java.awt.*;
+import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 
 public class Collision {
 
     private Ball ball;
-    private Rectangle[] paddle;
+    private Paddle paddle;
     //private Brick brick;
 
-    public Collision(Ball ball, Rectangle[] paddle) {
+    public Collision(Ball ball, Paddle paddle) {
 
         this.ball = ball;
         this.paddle = paddle;
@@ -19,14 +18,16 @@ public class Collision {
 
     public void check() {
 
-        boolean checkY = ball.getPositionY() + ball.getRADIUS() == paddle[0].getY();
+        int leftLimit = paddle.getPositionX();
+        int rightLimit = (paddle.getPositionX() + paddle.getWIDTH());
 
-        int leftLimit = (int) paddle[0].getX();
-        int rightLimit = (int) (paddle[2].getX()+paddle[2].getWidth());
-        int ballX = ball.getPositionX() + ball.getRADIUS()/2;
+        int ballX = ball.getPositionX() + ball.getRADIUS() / 2;
 
         boolean checkX = ballX > leftLimit && ballX < rightLimit;
+        boolean checkY = ball.getPositionY() + ball.getRADIUS() == paddle.getPositionY();
 
+        System.out.println("x" + checkX);
+        System.out.println("y" + checkY);
         if (checkY && checkX) {
             ball.invertSpeedY();
         }
