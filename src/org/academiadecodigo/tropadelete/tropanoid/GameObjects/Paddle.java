@@ -13,7 +13,7 @@ public class Paddle extends GameObjects {
 
     public Paddle() {
 
-        width = 15;
+        width = 10;
         height = 5;
 
         int centerZero = Board.getWIDTH() / 2 - (width / 2);
@@ -39,32 +39,31 @@ public class Paddle extends GameObjects {
     }
 
     public void move() throws InterruptedException {
+
         if (direction == Direction.LEFT) {
-            for (int i = 0; i < paddle.length; i++) {
-                if (paddle[i].getX() <= Board.getPADDING()) {
-                    return;
-                }
+
+            if (paddle[0].getX() <= Board.PADDING) {
+                return;
             }
 
-            paddle[0].translate(-10, 0);
-            paddle[1].translate(-10, 0);
-            paddle[2].translate(-10, 0);
-            Thread.sleep(50);
+            paddle[0].translate(-1, 0);
+            paddle[1].translate(-1, 0);
+            paddle[2].translate(-1, 0);
+            Thread.sleep(2);
         }
         if (direction == Direction.RIGHT) {
-            for (int i = 0; i < paddle.length; i++) {
-                if (paddle[i].getX() >= Board.getWIDTH() - Board.getPADDING()) {
-                    return;
-                }
+
+            if (paddle[2].getX() >= Board.getWIDTH()) {
+                return;
             }
-            paddle[0].translate(10, 0);
-            paddle[1].translate(10, 0);
-            paddle[2].translate(10, 0);
-            Thread.sleep(50);
+
+            paddle[0].translate(1, 0);
+            paddle[1].translate(1, 0);
+            paddle[2].translate(1, 0);
+            Thread.sleep(2);
         }
         if (direction == null) {
 
-            Thread.sleep(50);
         }
         show();
     }
@@ -77,5 +76,9 @@ public class Paddle extends GameObjects {
     public Direction getDirection() {
 
         return direction;
+    }
+
+    public Rectangle[] getPaddle() {
+        return paddle;
     }
 }

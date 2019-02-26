@@ -23,6 +23,7 @@ public class Ball extends GameObjects {
         ball = new Ellipse(positionX, positionY, RADIUS, RADIUS);
         show();
     }
+
     public Ball(Ball ball) {
 
         positionY = ball.positionY;
@@ -34,15 +35,25 @@ public class Ball extends GameObjects {
         int prevPosX = positionX;
         int prevPosY = positionY;
 
-        positionX += 5*speedX;
-        positionY += 5*speedY;
+        if (ball.getX()-RADIUS/4< Board.PADDING || ball.getX() + RADIUS/4 >= Board.getWIDTH()) {
+            speedX = -speedX;
+        }
 
-        ball.translate(positionX-prevPosX,positionY-prevPosY);
+        if (ball.getY() <= Board.PADDING) {
+            speedY = -speedY;
+        }
+
+        positionX += 2 * speedX;
+        positionY += 2 * speedY;
+
+
+        ball.translate(positionX - prevPosX, positionY - prevPosY);
+
 
         show();
 
 
-        Thread.sleep(10);
+        Thread.sleep(50);
         // System.out.println("x"+positionX);
         // System.out.println("y"+positionY);
     }
@@ -58,5 +69,17 @@ public class Ball extends GameObjects {
 
     public int getPositionY() {
         return positionY;
+    }
+
+    public int getRADIUS() {
+        return RADIUS;
+    }
+
+    public void invertSpeedY() {
+        this.speedY = -speedY;
+    }
+
+    public int getSpeedY() {
+        return speedY;
     }
 }

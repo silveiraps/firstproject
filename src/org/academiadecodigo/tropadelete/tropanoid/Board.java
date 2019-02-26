@@ -11,6 +11,7 @@ public class Board {
     public static final int WIDTH = 480;
     private Paddle paddle;
     private Ball ball;
+    private Collision collision;
 
 
     public Board() {
@@ -18,6 +19,7 @@ public class Board {
         grid.draw();
         this.paddle = new Paddle();
         this.ball = new Ball();
+        this.collision = new Collision(ball)
 
 
     }
@@ -27,8 +29,8 @@ public class Board {
         while (true) {
             try {
                 paddle.move();
-               // ball.move();
-                System.out.println(ball.getPositionX()+" "+ball.getPositionY());
+                ball.move();
+              //  System.out.println(ball.getPositionX()+" "+ball.getPositionY());
             } catch (InterruptedException e) {
             }
         }
