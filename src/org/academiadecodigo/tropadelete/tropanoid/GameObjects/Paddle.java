@@ -16,13 +16,13 @@ public class Paddle extends GameObjects {
         width = 15;
         height = 5;
 
-        int centerZero = Board.getWIDTH()/2-(width/2);
-        int leftZero = centerZero-width;
-        int rightZero = centerZero+width;
+        int centerZero = Board.getWIDTH() / 2 - (width / 2);
+        int leftZero = centerZero - width;
+        int rightZero = centerZero + width;
 
-        Rectangle paddleCenter = new Rectangle(centerZero,Board.getHEIGHT(),width, height);
-        Rectangle paddleLeft = new Rectangle(leftZero,Board.getHEIGHT(),width,height);
-        Rectangle paddleRight = new Rectangle(rightZero,Board.getHEIGHT(),width,height);
+        Rectangle paddleCenter = new Rectangle(centerZero, Board.getHEIGHT(), width, height);
+        Rectangle paddleLeft = new Rectangle(leftZero, Board.getHEIGHT(), width, height);
+        Rectangle paddleRight = new Rectangle(rightZero, Board.getHEIGHT(), width, height);
 
         paddle = new Rectangle[3];
         paddle[0] = paddleLeft;
@@ -38,24 +38,33 @@ public class Paddle extends GameObjects {
         paddle[2].fill();
     }
 
-    public void move() throws InterruptedException{
-        if( direction == Direction.LEFT) {
+    public void move() throws InterruptedException {
+        if (direction == Direction.LEFT) {
+            for (int i = 0; i < paddle.length; i++) {
+                if (paddle[i].getX() <= Board.getPADDING()) {
+                    return;
+                }
+            }
 
-            paddle[0].translate(-10,0);
-            paddle[1].translate(-10,0);
-            paddle[2].translate(-10,0);
-            Thread.sleep(1);
+            paddle[0].translate(-10, 0);
+            paddle[1].translate(-10, 0);
+            paddle[2].translate(-10, 0);
+            Thread.sleep(50);
         }
         if (direction == Direction.RIGHT) {
-
-            paddle[0].translate(10,0);
-            paddle[1].translate(10,0);
-            paddle[2].translate(10,0);
-            Thread.sleep(1);
+            for (int i = 0; i < paddle.length; i++) {
+                if (paddle[i].getX() >= Board.getWIDTH() - Board.getPADDING()) {
+                    return;
+                }
+            }
+            paddle[0].translate(10, 0);
+            paddle[1].translate(10, 0);
+            paddle[2].translate(10, 0);
+            Thread.sleep(50);
         }
         if (direction == null) {
 
-            Thread.sleep(1);
+            Thread.sleep(50);
         }
         show();
     }

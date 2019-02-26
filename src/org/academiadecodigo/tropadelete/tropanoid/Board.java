@@ -34,6 +34,10 @@ public class Board {
         }
     }
 
+    public static int getPADDING() {
+        return PADDING;
+    }
+
     public static int getHEIGHT() {
         return HEIGHT;
     }
