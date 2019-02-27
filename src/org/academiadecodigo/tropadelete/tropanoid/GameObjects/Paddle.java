@@ -6,7 +6,7 @@ import org.academiadecodigo.tropadelete.tropanoid.Direction;
 
 public class Paddle extends GameObjects {
 
-    private static final int WIDTH = 50;
+    private static final int WIDTH = 80;
     private static final int HEIGHT = 5;
     private Rectangle paddle;
     private Direction direction;
@@ -32,17 +32,17 @@ public class Paddle extends GameObjects {
 
 
         if (direction == Direction.LEFT) {
-            paddle.translate(-10, 0);
+            paddle.translate(-3, 0);
 
-            if (paddle.getX() <= Board.PADDING) {
-                paddle.translate(10, 0);
+            if (paddle.getX() <= Board.PADDING+2) {
+                paddle.translate(3, 0);
             }
             this.positionX=paddle.getX();
         }
         if (direction == Direction.RIGHT) {
-            paddle.translate(10, 0);
-            if (paddle.getX()+ WIDTH >= Board.getWIDTH()) {
-                paddle.translate(-10,0);
+            paddle.translate(3, 0);
+            if (paddle.getX()+ WIDTH-1 >= Board.getWIDTH()+Board.PADDING-1) {
+                paddle.translate(-3,0);
             }
             this.positionX=paddle.getX();
         }
@@ -80,7 +80,7 @@ public class Paddle extends GameObjects {
         if (direction == null) {
 
         }*/
-        Thread.sleep(1);
+        //Thread.sleep();
         show();
     }
 
@@ -99,11 +99,11 @@ public class Paddle extends GameObjects {
     }
 
     public int getPositionY() {
-        return positionY;
+        return paddle.getY();
     }
 
     public int getPositionX() {
-        return positionX;
+        return paddle.getX();
     }
 
     public int getWIDTH() {

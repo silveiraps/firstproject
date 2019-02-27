@@ -5,7 +5,7 @@ import org.academiadecodigo.tropadelete.tropanoid.Board;
 
 public class Ball extends GameObjects {
 
-    private final int RADIUS = 10;
+    private final int RADIUS = 20;
 
     private int positionX;
     private int positionY;
@@ -65,11 +65,11 @@ public class Ball extends GameObjects {
     }
 
     public int getPositionX() {
-        return positionX;
+        return ball.getX();
     }
 
     public int getPositionY() {
-        return positionY;
+        return ball.getY();
     }
 
     public int getRADIUS() {
