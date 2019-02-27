@@ -35,7 +35,7 @@ public class Ball extends GameObjects {
         int prevPosX = positionX;
         int prevPosY = positionY;
 
-        if (ball.getX()-RADIUS/4< Board.PADDING || ball.getX() + RADIUS/4 >= Board.getWIDTH()) {
+        if (ball.getX() - RADIUS / 4 < Board.PADDING || ball.getX() + RADIUS / 4 >= Board.getWIDTH()) {
             speedX = -speedX;
         }
 
@@ -43,8 +43,8 @@ public class Ball extends GameObjects {
             speedY = -speedY;
         }
 
-        positionX +=  speedX;
-        positionY +=  speedY;
+        positionX += speedX;
+        positionY += speedY;
 
 
         ball.translate(positionX - prevPosX, positionY - prevPosY);
