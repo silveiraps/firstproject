@@ -10,15 +10,17 @@ public class Paddle extends GameObjects {
     private static final int HEIGHT = 5;
     private Rectangle paddle;
     private Direction direction;
+    public static final int INITALY=Board.getHEIGHT()-10;
+    public static final int INITIALX=Board.getWIDTH() / 2 - WIDTH / 2;
     private int positionX;
     private int positionY;
 
     public Paddle() {
 
         positionX = Board.getWIDTH() / 2 - WIDTH / 2;
-        positionY = Board.getHEIGHT();
+        positionY = Board.getHEIGHT()-10;
 
-        this.paddle = new Rectangle(positionX, positionY, WIDTH, HEIGHT);
+        this.paddle = new Rectangle(INITIALX, INITALY, WIDTH, HEIGHT);
 
         show();
     }

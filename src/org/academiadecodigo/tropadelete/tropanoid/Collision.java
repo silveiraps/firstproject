@@ -30,25 +30,24 @@ public class Collision {
         int ballX = ball.getPositionX() + ball.getRADIUS() / 2;
 
         boolean checkX = ballX >= leftLimit && ballX <= rightLimit;
-        boolean checkY = ball.getPositionY() + ball.getRADIUS()-1 == paddle.getPositionY();
+        boolean checkY = ball.getPositionY() + ball.getRADIUS() == paddle.getPositionY();
         boolean checkLeftSideUp = ball.getPositionX() == rightLimit && (ballLeftDownLimit>paddle.getPositionY()&&ballLeftCentreLimit<paddle.getPositionY());
         boolean checkLeftSideDown = ball.getPositionX() == rightLimit && (ballLeftUpLimit<paddle.getPositionY()&&ballLeftCentreLimit>=paddle.getPositionY());
         boolean checkRightSideUp = ball.getPositionX()+ball.getRADIUS() == leftLimit && (ballRightDownLimit>paddle.getPositionY()&&ballRightCentreLimit<paddle.getPositionY());
         boolean checkRightSideDown = ball.getPositionX()+ball.getRADIUS() == leftLimit && (ballRightUpLimit<paddle.getPositionY()&&ballRightCentreLimit>=paddle.getPositionY());
+        boolean checkLose = ball.getPositionY()+ball.getRADIUS() >= Board.getHEIGHT();
 
 
         System.out.println("x" + checkX);
         System.out.println("y" + checkY);
+        if(checkLose){
+            ball.reset();
+        }
+
         if (checkY && checkX) {
             ball.invertSpeedY();
         }
-        if(checkLeftSideUp){
-            ball.invertSpeedY();
-        }
         if(checkLeftSideDown){
-            ball.invertSpeedY();
-        }
-        if(checkRightSideUp){
             ball.invertSpeedY();
         }
         if(checkRightSideDown){

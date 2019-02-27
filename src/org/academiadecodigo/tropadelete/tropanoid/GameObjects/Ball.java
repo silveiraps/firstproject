@@ -5,7 +5,7 @@ import org.academiadecodigo.tropadelete.tropanoid.Board;
 
 public class Ball extends GameObjects {
 
-    private final int RADIUS = 20;
+    private final int RADIUS = 10;
 
     private int positionX;
     private int positionY;
@@ -16,7 +16,7 @@ public class Ball extends GameObjects {
     public Ball() {
 
         positionX = (Board.getWIDTH() - RADIUS) / 2;
-        positionY = Board.getHEIGHT() - RADIUS;
+        positionY = Paddle.INITALY - RADIUS;
         speedX = (int) Math.ceil(Math.random() * 3);
         speedY = -1;
 
@@ -35,7 +35,7 @@ public class Ball extends GameObjects {
         int prevPosX = positionX;
         int prevPosY = positionY;
 
-        if (ball.getX()-RADIUS/4< Board.PADDING || ball.getX() + RADIUS/4 >= Board.getWIDTH()) {
+        if (ball.getX() - RADIUS / 4 < Board.PADDING || ball.getX() + RADIUS / 4 >= Board.getWIDTH()) {
             speedX = -speedX;
         }
 
@@ -43,8 +43,8 @@ public class Ball extends GameObjects {
             speedY = -speedY;
         }
 
-        positionX +=  speedX;
-        positionY +=  speedY;
+        positionX += speedX;
+        positionY += speedY;
 
 
         ball.translate(positionX - prevPosX, positionY - prevPosY);
@@ -64,6 +64,20 @@ public class Ball extends GameObjects {
         ball.draw();
     }
 
+    public void reset() {
+
+        ball.delete();
+        stopSpeed();
+        this.ball = new Ellipse((Board.getWIDTH() - RADIUS) / 2, Paddle.INITALY - RADIUS, RADIUS, RADIUS);
+        try {
+            this.move();
+        }
+        catch (InterruptedException e){}
+
+
+
+    }
+
     public int getPositionX() {
         return ball.getX();
     }
@@ -80,7 +94,16 @@ public class Ball extends GameObjects {
         this.speedY = -speedY;
     }
 
+    public void stopSpeed(){
+        this.speedY=0;
+        this.speedX=0;
+    }
+
     public int getSpeedY() {
         return speedY;
+    }
+
+    public void hide() {
+        ball.delete();
     }
 }
