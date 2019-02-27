@@ -32,19 +32,20 @@ public class Paddle extends GameObjects {
 
 
         if (direction == Direction.LEFT) {
-            paddle.translate(-3, 0);
-
-            if (paddle.getX() <= Board.PADDING+2) {
-                paddle.translate(3, 0);
-            }
             this.positionX=paddle.getX();
+
+            if (paddle.getX() <= Board.PADDING) {
+                return;
+            }
+            paddle.translate(-5, 0);
         }
         if (direction == Direction.RIGHT) {
-            paddle.translate(3, 0);
-            if (paddle.getX()+ WIDTH-1 >= Board.getWIDTH()+Board.PADDING-1) {
-                paddle.translate(-3,0);
-            }
             this.positionX=paddle.getX();
+
+            if (paddle.getX()+ WIDTH >= Board.getWIDTH()+Board.PADDING) {
+                return;
+            }
+            paddle.translate(5, 0);
         }
 
         /*if (direction == Direction.LEFT && paddle.getX() > Board.PADDING) {
