@@ -5,7 +5,7 @@ import org.academiadecodigo.tropadelete.tropanoid.Board;
 
 public class Ball extends GameObjects {
 
-    private final int RADIUS = 20;
+    public static final int RADIUS = 20;
 
     private int positionX;
     private int positionY;
