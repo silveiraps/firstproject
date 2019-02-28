@@ -12,6 +12,7 @@ public class Board {
     private Paddle paddle;
     private Ball ball;
     private Collision collision;
+    private int lifes;
 
 
     public Board() {
@@ -19,7 +20,8 @@ public class Board {
         grid.draw();
         this.paddle = new Paddle();
         this.ball = new Ball();
-        this.collision = new Collision(ball,paddle);
+        this.collision = new Collision(ball,paddle,this);
+        this.lifes = 3;
     }
 
     public void start() {
@@ -29,6 +31,10 @@ public class Board {
                 paddle.move();
                 ball.move();
                 collision.check();
+                if(lifes==0){
+                    System.out.println("Game Ended");
+                    return;
+                }
               //  System.out.println(ball.getPositionX()+" "+ball.getPositionY());
             } catch (InterruptedException e) {
             }
@@ -49,5 +55,13 @@ public class Board {
 
     public Paddle getPaddle() {
         return paddle;
+    }
+
+    public int getLifes() {
+        return lifes;
+    }
+
+    public void loseLife() {
+        this.lifes --;
     }
 }

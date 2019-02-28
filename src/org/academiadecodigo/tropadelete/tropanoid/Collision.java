@@ -7,12 +7,14 @@ public class Collision {
 
     private Ball ball;
     private Paddle paddle;
+    private Board board;
     //private Brick brick;
 
-    public Collision(Ball ball, Paddle paddle) {
+    public Collision(Ball ball, Paddle paddle, Board board) {
 
         this.ball = ball;
         this.paddle = paddle;
+        this.board = board;
     }
 
 
@@ -41,6 +43,8 @@ public class Collision {
         System.out.println("x" + checkX);
         System.out.println("y" + checkY);
         if(checkLose){
+            board.loseLife();
+            System.out.println(board.getLifes());
             ball.reset();
         }
 

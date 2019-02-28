@@ -82,7 +82,9 @@ public class Paddle extends GameObjects {
         if (direction == null) {
 
         }*/
-        //Thread.sleep();
+        //
+        //
+        Thread.sleep(1);
         show();
     }
 
