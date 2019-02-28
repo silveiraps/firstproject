@@ -1,7 +1,10 @@
 package org.academiadecodigo.tropadelete.tropanoid;
 
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
+import org.academiadecodigo.tropadelete.tropanoid.Keyboard.KeyboardListener;
 
 public class Collision {
 
@@ -46,6 +49,7 @@ public class Collision {
             board.loseLife();
             System.out.println(board.getLifes());
             ball.reset();
+            ball.invertSpeedY();
         }
 
         if (checkY && checkX) {

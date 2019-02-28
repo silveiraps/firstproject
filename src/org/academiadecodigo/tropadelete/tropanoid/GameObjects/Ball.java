@@ -62,17 +62,13 @@ public class Ball extends GameObjects {
     public void show() {
 
         ball.draw();
+        ball.fill();
     }
 
     public void reset() {
 
         ball.delete();
-        stopSpeed();
         this.ball = new Ellipse((Board.getWIDTH() - RADIUS) / 2, Paddle.INITALY - RADIUS, RADIUS, RADIUS);
-        try {
-            this.move();
-        }
-        catch (InterruptedException e){}
 
 
 
