@@ -2,6 +2,7 @@ package org.academiadecodigo.tropadelete.tropanoid;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
+import org.academiadecodigo.tropadelete.tropanoid.GameObjects.BrickFactory;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 
 public class Board {
@@ -20,6 +21,7 @@ public class Board {
         this.paddle = new Paddle();
         this.ball = new Ball();
         this.collision = new Collision(ball,paddle);
+        BrickFactory.CreateBricks(50);
     }
 
     public void start() {
