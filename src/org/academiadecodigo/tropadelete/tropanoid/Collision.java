@@ -31,6 +31,7 @@ public class Collision {
 
         boolean checkX = ballX >= leftLimit && ballX <= rightLimit;
         boolean checkY = ball.getPositionY() + ball.getRADIUS()-1 == paddle.getPositionY();
+
         boolean checkLeftSideUp = ball.getPositionX() == rightLimit && (ballLeftDownLimit>paddle.getPositionY()&&ballLeftCentreLimit<paddle.getPositionY());
         boolean checkLeftSideDown = ball.getPositionX() == rightLimit && (ballLeftUpLimit<paddle.getPositionY()&&ballLeftCentreLimit>=paddle.getPositionY());
         boolean checkRightSideUp = ball.getPositionX()+ball.getRADIUS() == leftLimit && (ballRightDownLimit>paddle.getPositionY()&&ballRightCentreLimit<paddle.getPositionY());

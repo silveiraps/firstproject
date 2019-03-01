@@ -2,85 +2,94 @@ package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.tropadelete.tropanoid.Board;
+import org.academiadecodigo.tropadelete.tropanoid.Utils.BallDirection;
+import org.academiadecodigo.tropadelete.tropanoid.Utils.Collision;
 
-public class Ball extends GameObjects {
+public class Ball extends GameObject {
 
-    private final int RADIUS = 20;
+    private final double  RADIUS = 10;
 
-    private int positionX;
-    private int positionY;
-    private int speedX;
-    private int speedY;
+    private double deltaX;
+    private double deltaY;
+    private int speed;
+
+    private BallDirection direction;
     private Ellipse ball;
+    private Paddle paddle;
 
-    public Ball() {
+    public Ball(Paddle paddle) {
 
-        positionX = (Board.getWIDTH() - RADIUS) / 2;
-        positionY = Board.getHEIGHT() - RADIUS;
-        speedX = (int) Math.ceil(Math.random() * 3);
-        speedY = -1;
+        this.paddle = paddle;
+        x = (Board.WIDTH - RADIUS) / 2;
+        y = Board.PADDLE_Y - RADIUS;
+        speed = 2;
 
-        ball = new Ellipse(positionX, positionY, RADIUS, RADIUS);
+        direction = BallDirection.pick();
+        updateDeltas();
+
+        ball = new Ellipse(x, y, RADIUS, RADIUS);
         show();
     }
 
-    public Ball(Ball ball) {
+    public void move(Collision collision) {
 
-        positionY = ball.positionY;
-        positionX = ball.positionX;
-    }
+        double prevX = x;
+        double prevY = y;
 
-    public void move() throws InterruptedException {
+        if (x < Board.PADDING || x + RADIUS  > Board.WIDTH+Board.PADDING-1) {
 
-        int prevPosX = positionX;
-        int prevPosY = positionY;
 
-        if (ball.getX() - RADIUS / 4 < Board.PADDING || ball.getX() + RADIUS / 4 >= Board.getWIDTH()) {
-            speedX = -speedX;
+            this.direction = direction.getOppositeX();
+            updateDeltas();
+
+        }
+        if (y <= Board.PADDING || y >= Board.HEIGHT) {
+
+            this.direction = direction.getOppositeY();
+            updateDeltas();
         }
 
-        if (ball.getY() <= Board.PADDING) {
-            speedY = -speedY;
-        }
+        x += deltaX * speed;
+        y += deltaY * speed;
 
-        positionX += speedX;
-        positionY += speedY;
-
-
-        ball.translate(positionX - prevPosX, positionY - prevPosY);
-        positionX = positionX - prevPosX;
-        positionY = positionY - prevPosY;
-
+        ball.translate(x - prevX, y - prevY);
+        collision.checkBallPaddle(this,paddle);
         show();
 
-
-        Thread.sleep(5);
-        // System.out.println("x"+positionX);
-        // System.out.println("y"+positionY);
     }
 
-    public void show() {
-
-        ball.draw();
-    }
-
-    public int getPositionX() {
+    @Override
+    public double getX() {
         return ball.getX();
     }
 
-    public int getPositionY() {
+    @Override
+    public double getY() {
         return ball.getY();
     }
 
-    public int getRADIUS() {
+    public void show() {
+        ball.draw();
+    }
+
+    public void updateDeltas() {
+        deltaX = direction.getDeltaX();
+        deltaY = direction.getDeltaY();
+    }
+
+    public void setDirection(BallDirection direction) {
+        this.direction = direction;
+    }
+
+    public double getRADIUS() {
         return RADIUS;
     }
 
-    public void invertSpeedY() {
-        this.speedY = -speedY;
+    public BallDirection getDirection() {
+        return direction;
     }
 
-    public int getSpeedY() {
-        return speedY;
+    public double getDeltaY() {
+        return deltaY;
     }
 }
