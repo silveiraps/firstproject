@@ -1,21 +1,65 @@
 package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-public class Brick extends GameObject {
+public class Brick {
 
-    private boolean destroyed;
-    private static final int BRICK_WIDTH = 40;
-    private static final int BRICK_HEIGHT = 20;
-    private Rectangle brick;
+    private static final int WIDTH = 49;
+    private static final int HEIGHT = 15;
+    private Rectangle rectangle;
+    private int posX;
+    private int posY;
+    private Color color;
+    private boolean isDestroyed;
 
-    public Brick(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Brick(int posX, int posY, Color color) {
 
-        destroyed = false;
-        brick = new Rectangle(x,y,BRICK_WIDTH, BRICK_HEIGHT);
-        brick.fill();
+        rectangle = new Rectangle(posX,posY, WIDTH, HEIGHT);
+        this.posX = posX;
+        this.posY = posY;
+        rectangle = new Rectangle(posX,posY, WIDTH, HEIGHT);
+        rectangle.setColor(color);
+        this.color = color;
+        this.isDestroyed = false;
+        showBrick();
+
+    }
+
+    public void showBrick() {
+        rectangle.fill();
+    }
+
+    public void hideBrick() {
+        rectangle.delete();
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
+
+    public void setDestroyed() {
+        isDestroyed = true;
     }
 
 }

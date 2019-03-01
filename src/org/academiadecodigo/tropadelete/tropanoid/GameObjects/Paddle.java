@@ -13,7 +13,7 @@ public class Paddle extends GameObject {
 
     public Paddle() {
         imageWidth = 80;
-        imageHeight = 20;
+        imageHeight = 10;
         deltaX = 1;
         speed=3;
 

@@ -7,10 +7,10 @@ import org.academiadecodigo.tropadelete.tropanoid.Utils.Collision;
 
 public class Board {
 
-    public static final int WIDTH = 1500;
-    public static final int HEIGHT = 240;
+    public static final int WIDTH = 480;
+    public static final int HEIGHT = 640;
     public static final int PADDING = 10;
-    public static final int PADDLE_Y = HEIGHT - 40;
+    public static final int PADDLE_Y = HEIGHT - 30;
 
     private Paddle paddle;
     private Ball ball;
