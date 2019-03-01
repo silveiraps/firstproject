@@ -2,6 +2,7 @@ package org.academiadecodigo.tropadelete.tropanoid;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
+import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.BrickFactory;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 
@@ -12,6 +13,7 @@ public class Board {
     public static final int WIDTH = 480;
     private Paddle paddle;
     private Ball ball;
+    private Brick[] bricks;
     private Collision collision;
 
 
@@ -21,7 +23,7 @@ public class Board {
         this.paddle = new Paddle();
         this.ball = new Ball();
         this.collision = new Collision(ball,paddle);
-        BrickFactory.CreateBricks(50);
+        this.bricks = BrickFactory.CreateBricks(50);
     }
 
     public void start() {
@@ -31,7 +33,12 @@ public class Board {
                 paddle.move();
                 ball.move();
                 collision.check();
-              //  System.out.println(ball.getPositionX()+" "+ball.getPositionY());
+
+                for (int i = 0; i < bricks.length; i++) {
+                    collision.checkBrickCollision(bricks[i]);
+                }
+
+                //  System.out.println(ball.getPositionX()+" "+ball.getPositionY());
             } catch (InterruptedException e) {
             }
         }
