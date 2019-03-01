@@ -1,18 +1,20 @@
 package org.academiadecodigo.tropadelete.tropanoid;
 
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
+import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 
 public class Collision {
 
     private Ball ball;
     private Paddle paddle;
-    //private Brick brick;
+    private Brick brick;
 
     public Collision(Ball ball, Paddle paddle) {
 
         this.ball = ball;
         this.paddle = paddle;
+        this.brick = brick;
     }
 
 
@@ -54,6 +56,52 @@ public class Collision {
         if(checkRightSideDown){
             ball.invertSpeedY();
         }
+    }
+
+    public void checkBrickCollision(Brick brick) {
+
+        int brickLeftLimit = brick.getPosX();
+        int brickRightLimit = brick.getPosX() + Brick.getWIDTH();
+        int brickUpLimit = brick.getPosY();
+        int brickDownLimit = brick.getPosY() + Brick.getHEIGHT();
+
+        boolean checkLeft = ball.getPositionX() + ball.getRADIUS() > brickLeftLimit && ball.getPositionX() + ball.getRADIUS() < brickRightLimit;
+        boolean checkRight = ball.getPositionX() + ball.getRADIUS() < brickRightLimit && ball.getPositionX() + ball.getRADIUS() > brickLeftLimit;
+        boolean checkUp = ball.getPositionY() + ball.getRADIUS() > brickUpLimit && ball.getPositionY() + ball.getRADIUS() < brickDownLimit;
+        boolean checkDown = ball.getPositionY() + ball.getRADIUS() < brickDownLimit && ball.getPositionY() + ball.getRADIUS() > brickUpLimit;
+
+        if (checkLeft && checkUp) {
+            if (brick.isDestroyed()) {
+                return;
+            }
+            brick.setDestroyed();
+            brick.hideBrick();
+        }
+
+        if (checkRight) {
+            if (brick.isDestroyed()) {
+                return;
+            }
+            brick.setDestroyed();
+            brick.hideBrick();
+        }
+
+        if (checkUp) {
+            if (brick.isDestroyed()) {
+                return;
+            }
+            brick.setDestroyed();
+            brick.hideBrick();
+        }
+
+        if (checkDown) {
+            if (brick.isDestroyed()) {
+                return;
+            }
+            brick.setDestroyed();
+            brick.hideBrick();
+        }
+
     }
 
 }

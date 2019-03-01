@@ -7,16 +7,19 @@ public class Brick {
 
     private static final int WIDTH = 48;
     private static final int HEIGHT = 15;
+    private Rectangle rectangle;
     private int posX;
     private int posY;
-    private Rectangle rectangle;
     private Color color;
+    private boolean isDestroyed;
 
     public Brick(int posX, int posY, Color color) {
 
+        rectangle = new Rectangle(posX,posY, WIDTH, HEIGHT);
         this.posX = posX;
         this.posY = posY;
-        rectangle = new Rectangle(posX,posY, WIDTH, HEIGHT);
+        this.color = color;
+        this.isDestroyed = false;
         showBrick();
 
     }
@@ -44,4 +47,13 @@ public class Brick {
     public static int getHEIGHT() {
         return HEIGHT;
     }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
+
+    public void setDestroyed() {
+        isDestroyed = true;
+    }
+
 }

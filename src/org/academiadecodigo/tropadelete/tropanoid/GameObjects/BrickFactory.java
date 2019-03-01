@@ -17,6 +17,7 @@ public class BrickFactory {
         for (int i = 0; i < brick.length; i++) {
             brick[i] = new Brick(posX, posY, Color.BLUE);
             posX += Brick.getWIDTH() + spaceX;
+
             if (posX + Brick.getWIDTH() > Board.getWIDTH()) {
                 posY += Brick.getHEIGHT() + spaceY;
                 posX = Board.PADDING;
