@@ -18,7 +18,7 @@ public class Brick {
 
         this.posX = posX;
         this.posY = posY;
-        picture = new Picture(posX, posY, "brick3.png");
+        picture = new Picture(posX, posY, randomBrick());
         //rectangle.setColor(color);
         this.color = color;
         this.isDestroyed = false;
@@ -30,13 +30,26 @@ public class Brick {
         picture.draw();
     }
 
-    public void randomBrick() {
-        if (Math.random() * 5 > 1) {
-            //picture.fill();
-        } else {
-            setDestroyed();
-            picture.delete();
+    public String randomBrick() {
+
+        String brickOne = "brick.png";
+        String brickTwo = "brick1.png";
+        String brickThree = "brick2.png";
+
+        int randomNumber = (int) (Math.random() * 10);
+
+        if (randomNumber <= 3) {
+            return brickOne;
         }
+
+        if (randomNumber > 3 && randomNumber <= 6) {
+            return brickTwo;
+        }
+
+        if (randomNumber > 6) {
+            return brickThree;
+        }
+        return null;
     }
 
     public void hideBrick() {

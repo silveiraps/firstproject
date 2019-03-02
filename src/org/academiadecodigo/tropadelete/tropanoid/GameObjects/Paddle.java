@@ -1,6 +1,7 @@
 package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.tropanoid.Board;
 import org.academiadecodigo.tropadelete.tropanoid.Direction;
 
@@ -8,7 +9,7 @@ public class Paddle extends GameObjects {
 
     private static final int WIDTH = 80;
     private static final int HEIGHT = 5;
-    private Rectangle paddle;
+    private Picture paddle;
     private Direction direction;
     private int positionX;
     private int positionY;
@@ -18,13 +19,13 @@ public class Paddle extends GameObjects {
         positionX = Board.getWIDTH() / 2 - WIDTH / 2;
         positionY = Board.getHEIGHT();
 
-        this.paddle = new Rectangle(positionX, positionY, WIDTH, HEIGHT);
+        this.paddle = new Picture(positionX, positionY, "tropanoid_graphics_paddle.png");
 
         show();
     }
 
     public void show() {
-        paddle.fill();
+        paddle.draw();
     }
 
     public void move() throws InterruptedException {
@@ -95,7 +96,7 @@ public class Paddle extends GameObjects {
         return direction;
     }
 
-    public Rectangle getPaddle() {
+    public Picture getPaddle() {
         return paddle;
     }
 
