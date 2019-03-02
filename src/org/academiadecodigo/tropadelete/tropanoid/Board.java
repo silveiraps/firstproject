@@ -35,7 +35,7 @@ public class Board {
                 collision.check();
 
                 for (int i = 0; i < bricks.length; i++) {
-                    collision.checkBrickCollision(bricks[i]);
+                    collision.checkBrickCollision(bricks[i], ball);
                 }
 
                 //  System.out.println(ball.getPositionX()+" "+ball.getPositionY());

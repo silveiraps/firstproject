@@ -58,48 +58,26 @@ public class Collision {
         }
     }
 
-    public void checkBrickCollision(Brick brick) {
+    public void checkBrickCollision(Brick brick, Ball ball) {
 
         int brickLeftLimit = brick.getPosX();
         int brickRightLimit = brick.getPosX() + Brick.getWIDTH();
         int brickUpLimit = brick.getPosY();
         int brickDownLimit = brick.getPosY() + Brick.getHEIGHT();
 
-        boolean checkLeft = ball.getPositionX() + ball.getRADIUS() > brickLeftLimit && ball.getPositionX() + ball.getRADIUS() < brickRightLimit;
-        boolean checkRight = ball.getPositionX() + ball.getRADIUS() < brickRightLimit && ball.getPositionX() + ball.getRADIUS() > brickLeftLimit;
-        boolean checkUp = ball.getPositionY() + ball.getRADIUS() > brickUpLimit && ball.getPositionY() + ball.getRADIUS() < brickDownLimit;
-        boolean checkDown = ball.getPositionY() + ball.getRADIUS() < brickDownLimit && ball.getPositionY() + ball.getRADIUS() > brickUpLimit;
+        boolean checkLeft = ball.getPositionX() + ball.getRADIUS() > brickLeftLimit;
+        boolean checkRight = ball.getPositionX() < brickRightLimit;
+        boolean checkUp = ball.getPositionY() + ball.getRADIUS() > brickUpLimit;
+        boolean checkDown = ball.getPositionY() < brickDownLimit;
 
-        if (checkLeft && checkUp) {
+        if (checkLeft && checkRight && checkUp && checkDown) {
             if (brick.isDestroyed()) {
                 return;
             }
             brick.setDestroyed();
             brick.hideBrick();
-        }
+            System.out.println("hide");
 
-        if (checkRight) {
-            if (brick.isDestroyed()) {
-                return;
-            }
-            brick.setDestroyed();
-            brick.hideBrick();
-        }
-
-        if (checkUp) {
-            if (brick.isDestroyed()) {
-                return;
-            }
-            brick.setDestroyed();
-            brick.hideBrick();
-        }
-
-        if (checkDown) {
-            if (brick.isDestroyed()) {
-                return;
-            }
-            brick.setDestroyed();
-            brick.hideBrick();
         }
 
     }

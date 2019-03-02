@@ -15,22 +15,27 @@ public class Brick {
 
     public Brick(int posX, int posY, Color color) {
 
-        rectangle = new Rectangle(posX,posY, WIDTH, HEIGHT);
         this.posX = posX;
         this.posY = posY;
-<<<<<<< HEAD
         rectangle = new Rectangle(posX,posY, WIDTH, HEIGHT);
         rectangle.setColor(color);
-=======
         this.color = color;
         this.isDestroyed = false;
->>>>>>> c1dcd67df4c8eacad9f9e81d61e7224fec8f8141
-        showBrick();
+        randomBrick();
 
     }
 
     public void showBrick() {
         rectangle.fill();
+    }
+
+    public void randomBrick() {
+        if (Math.random() * 5 > 1) {
+            rectangle.fill();
+        } else {
+            setDestroyed();
+            rectangle.delete();
+        }
     }
 
     public void hideBrick() {
@@ -53,11 +58,10 @@ public class Brick {
         return HEIGHT;
     }
 
-<<<<<<< HEAD
     public void setColor(Color color) {
         this.color = color;
     }
-=======
+
     public boolean isDestroyed() {
         return isDestroyed;
     }
@@ -66,5 +70,4 @@ public class Brick {
         isDestroyed = true;
     }
 
->>>>>>> c1dcd67df4c8eacad9f9e81d61e7224fec8f8141
 }
