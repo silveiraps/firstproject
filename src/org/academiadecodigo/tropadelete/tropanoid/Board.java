@@ -1,6 +1,7 @@
 package org.academiadecodigo.tropadelete.tropanoid;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.BrickFactory;
@@ -18,7 +19,7 @@ public class Board {
 
 
     public Board() {
-        Rectangle grid = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
+        Picture grid = new Picture(PADDING, PADDING, "tropanoid_graphics_board.png");
         grid.draw();
         this.paddle = new Paddle();
         this.ball = new Ball();

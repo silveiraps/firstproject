@@ -1,6 +1,7 @@
 package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.tropanoid.Board;
 
 public class Ball extends GameObjects {
@@ -11,7 +12,7 @@ public class Ball extends GameObjects {
     private int positionY;
     private int speedX;
     private int speedY;
-    private Ellipse ball;
+    private Picture ball;
 
     public Ball() {
 
@@ -20,7 +21,7 @@ public class Ball extends GameObjects {
         speedX = (int) Math.ceil(Math.random() * 3);
         speedY = -1;
 
-        ball = new Ellipse(positionX, positionY, RADIUS, RADIUS);
+        ball = new Picture(positionX, positionY, "ball.png");
         show();
     }
 

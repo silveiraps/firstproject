@@ -2,44 +2,45 @@ package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Brick {
 
     private static final int WIDTH = 49;
     private static final int HEIGHT = 15;
-    private Rectangle rectangle;
+    private Picture picture;
     private int posX;
     private int posY;
     private Color color;
     private boolean isDestroyed;
 
-    public Brick(int posX, int posY, Color color) {
+    public Brick(int posX, int posY) {
 
         this.posX = posX;
         this.posY = posY;
-        rectangle = new Rectangle(posX,posY, WIDTH, HEIGHT);
-        rectangle.setColor(color);
+        picture = new Picture(posX, posY, "brick3.png");
+        //rectangle.setColor(color);
         this.color = color;
         this.isDestroyed = false;
-        randomBrick();
+        showBrick();
 
     }
 
     public void showBrick() {
-        rectangle.fill();
+        picture.draw();
     }
 
     public void randomBrick() {
         if (Math.random() * 5 > 1) {
-            rectangle.fill();
+            //picture.fill();
         } else {
             setDestroyed();
-            rectangle.delete();
+            picture.delete();
         }
     }
 
     public void hideBrick() {
-        rectangle.delete();
+        picture.delete();
     }
 
     public int getPosX() {

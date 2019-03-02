@@ -1,6 +1,7 @@
 package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.tropanoid.Board;
 
 public class BrickFactory {
@@ -15,7 +16,7 @@ public class BrickFactory {
         Brick[] brick = new Brick[bricksNumber];
 
         for (int i = 0; i < brick.length; i++) {
-            brick[i] = new Brick(posX, posY, i % 3 == 0 ? Color.GREEN:Color.BLUE);
+            brick[i] = new Brick(posX, posY);
             posX += Brick.getWIDTH() + spaceX;
 
             if (posX + Brick.getWIDTH() > Board.getWIDTH()) {
