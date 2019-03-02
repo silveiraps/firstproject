@@ -4,15 +4,19 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.tropadelete.tropanoid.Board;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 
 public class KeyboardListener implements KeyboardHandler {
 
     private Paddle paddle;
+    private Board board;
 
-    public KeyboardListener(Paddle paddle) {
+    public KeyboardListener(Paddle paddle,Board board) {
 
         this.paddle = paddle;
+        this.board = board;
+
         Keyboard keyboard = new Keyboard(this);
 
         KeyboardEvent right = new KeyboardEvent();
@@ -34,6 +38,11 @@ public class KeyboardListener implements KeyboardHandler {
         leftR.setKey(KeyboardEvent.KEY_LEFT);
         leftR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         keyboard.addEventListener(leftR);
+
+        KeyboardEvent up = new KeyboardEvent();
+        up.setKey(KeyboardEvent.KEY_UP);
+        up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(up);
     }
 
     @Override
@@ -47,6 +56,9 @@ public class KeyboardListener implements KeyboardHandler {
 
             case KeyboardEvent.KEY_RIGHT:
                 this.paddle.setDirection(PaddleDirection.RIGHT);
+                break;
+            case KeyboardEvent.KEY_UP:
+                this.board.setMoveBall();
                 break;
         }
     }

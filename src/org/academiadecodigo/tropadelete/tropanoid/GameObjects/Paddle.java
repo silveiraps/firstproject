@@ -17,7 +17,7 @@ public class Paddle extends GameObject {
         deltaX = 1;
         speed=3;
 
-        x = Board.WIDTH / 2 - imageWidth / 2;
+        x = (Board.WIDTH +Board.PADDING)/ 2 - imageWidth / 2;
         y = Board.PADDLE_Y;
 
         paddle = new Rectangle(x, y, imageWidth, imageHeight);
@@ -30,7 +30,7 @@ public class Paddle extends GameObject {
 
             paddle.translate(-deltaX*speed,0);
 
-            if (paddle.getX() <= Board.PADDING+1) {
+            if (paddle.getX() < Board.PADDING) {
 
                 paddle.translate(deltaX*speed,0);
             }
@@ -57,5 +57,9 @@ public class Paddle extends GameObject {
     public void setDirection(PaddleDirection direction) {
 
         this.direction = direction;
+    }
+    public void reset() {
+        paddle.translate((Board.WIDTH +Board.PADDING)/ 2 - imageWidth / 2-x,0);
+        x = paddle.getX();
     }
 }

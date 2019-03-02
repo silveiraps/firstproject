@@ -11,22 +11,6 @@ public abstract class GameObject {
 
     protected Color color;
 
-    public void setImageHeight(int imageHeight) {
-        this.imageHeight = imageHeight;
-    }
-
-    public void setImageWidth(int imageWidth) {
-        this.imageWidth = imageWidth;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public int getImageHeight() {
         return imageHeight;
     }

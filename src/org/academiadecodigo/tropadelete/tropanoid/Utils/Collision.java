@@ -1,17 +1,51 @@
 package org.academiadecodigo.tropadelete.tropanoid.Utils;
 
+import org.academiadecodigo.tropadelete.tropanoid.Board;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
+import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 
 public class Collision {
 
-    private Ball ball;
-    private Paddle paddle;
+    public void checkBallBrick(Ball ball, Brick[] bricks) {
+
+        double ballUpperLimit = ball.getY();
+        double ballLeftLimit = ball.getX();
+        double ballRightLimit = ball.getX() + ball.getDIAMETER();
+        double ballLowerLimit = ball.getY() + ball.getDIAMETER();
 
 
-    public Collision(Ball ball, Paddle paddle) {
-        this.ball = ball;
-        this.paddle = paddle;
+        for (int i = 0; i < bricks.length; i++) {
+
+            double brickUp = bricks[i].getPosY();
+            double brickDown = bricks[i].getPosY() + Brick.getHEIGHT();
+            double brickLeft = bricks[i].getPosX();
+            double brickRight = bricks[i].getPosX() + Brick.getWIDTH();
+
+
+
+            boolean upCheck = ballLowerLimit >= brickUp;
+            boolean lefCheck = ballRightLimit >= brickLeft;
+            boolean righCheck = ballLeftLimit <= brickRight;
+            boolean downCheck = ballUpperLimit <= brickDown;
+
+
+            boolean insideX = righCheck && lefCheck;
+            boolean insideY = upCheck && downCheck;
+
+            if (insideX && downCheck) {
+
+                if (!bricks[i].isDestroyed()) {
+
+                    bricks[i].setDestroyed();
+
+                    bricks[i].hideBrick();
+
+                    ball.setDirection(ball.getDirection().getOppositeY());
+                    ball.updateDeltas();
+                }
+            }
+        }
     }
 
     public void checkBallPaddle(Ball ball, Paddle paddle) {
@@ -21,31 +55,38 @@ public class Collision {
         double paddleLeftLimit = paddle.getX();
         double paddleRightLimit = paddle.getX() + paddle.getImageWidth();
 
-        double ballCenterX = ball.getX() + ball.getRADIUS() / 2;
-        double ballCenterY = ball.getY() + ball.getRADIUS() / 2;
+        double ballCenterX = ball.getX() + ball.getDIAMETER() / 2;
+        double ballCenterY = ball.getY() + ball.getDIAMETER() / 2;
 
         double ballUpperLimit = ball.getY();
-        double ballLowerLimit = ball.getY() + ball.getRADIUS();
+        double ballLowerLimit = ball.getY() + ball.getDIAMETER();
 
         double ballLeftLimit = ball.getX();
-        double ballRightLimit = ball.getX() + ball.getRADIUS();
+        double ballRightLimit = ball.getX() + ball.getDIAMETER();
 
-        boolean ballPaddleYCollision = ballLowerLimit >= paddleUpperLimit - 2 && ballLowerLimit <= paddleUpperLimit + 2;
-        boolean ballPaddleXCollision = ballRightLimit >= paddleLeftLimit && ballLeftLimit <= paddleRightLimit;
 
-        if (ballPaddleYCollision && ballPaddleXCollision) {
+        boolean upSide = ballLowerLimit >= paddleUpperLimit;
+        boolean leftSide = ballRightLimit >= paddleLeftLimit;
+        boolean rightSide = ballLeftLimit <= paddleRightLimit;
+        boolean downSide = ballUpperLimit <= paddleLowerLimit;
+
+
+
+        if ((upSide && downSide && leftSide && rightSide)) {
+
+
             if (ball.getDeltaY() < 0) {
                 return;
             }
             double paddleBallDelta = ballRightLimit - paddleLeftLimit;
 
-            if (paddleBallDelta >= 0 && paddleBallDelta <= (paddle.getImageWidth() + ball.getRADIUS()) * 3 / 7) {
+            if (paddleBallDelta >= 0 && paddleBallDelta <= (paddle.getImageWidth() + ball.getDIAMETER()) * 0.5) {
 
                 ball.setDirection(ball.getDirection().getNext(1));
             }
 
-            if (paddleBallDelta >= (paddle.getImageWidth() + ball.getRADIUS()) * 4 / 7 &&
-                    paddleBallDelta <= (paddle.getImageWidth() + ball.getRADIUS())) {
+            if (paddleBallDelta >= (paddle.getImageWidth() + ball.getDIAMETER()) * 0.5 &&
+                    paddleBallDelta <= (paddle.getImageWidth() + ball.getDIAMETER())) {
 
                 ball.setDirection(ball.getDirection().getNext(-1));
 
@@ -55,6 +96,6 @@ public class Collision {
             ball.updateDeltas();
 
         }
-    }
 
+    }
 }

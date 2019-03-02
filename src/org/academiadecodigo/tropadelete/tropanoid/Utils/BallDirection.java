@@ -111,7 +111,7 @@ public enum BallDirection {
 
         if(delta > 0) {
             for (int i = 0; i < values().length; i++) {
-                if( i == 11) {
+                if( i == 11 && this == values()[i]) {
                     return values()[i];
                 }
                 if (i + delta >= values().length && this == values()[i]) {
@@ -124,7 +124,7 @@ public enum BallDirection {
         }
         if (delta < 0 ) {
             for (int i = 0; i < values().length; i++) {
-                if( i == 12) {
+                if( i == 12 && this == values()[i]) {
                     return values()[i];
                 }
                 if( i + delta < 0 && this == values()[i]) {

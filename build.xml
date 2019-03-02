@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
-<project name="Karma's a Bitch!" default="jarfile">
+<project name="Tropanoid" default="jarfile">
 
     <target name="init" description="Initializes properties">
-        <property name="project.name" value="Karma's a Bitch!" />
+        <property name="project.name" value="Tropanoid" />
         <property name="src.dir" value="src" />
-        <property name="main.class" value="org.academiadecodigo.tropadelete.snake.Main" />
+        <property name="main.class" value="org.academiadecodigo.tropadelete.tropanoid.Main" />
         <property name="build.dir" value="build" />
         <property name="lib.dir" value="lib" />
         <property name="classes.dir" value="${build.dir}/classes" />

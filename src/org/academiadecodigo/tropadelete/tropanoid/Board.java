@@ -1,8 +1,11 @@
 package org.academiadecodigo.tropadelete.tropanoid;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
+import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
+import org.academiadecodigo.tropadelete.tropanoid.Utils.BrickFactory;
 import org.academiadecodigo.tropadelete.tropanoid.Utils.Collision;
 
 public class Board {
@@ -15,32 +18,67 @@ public class Board {
     private Paddle paddle;
     private Ball ball;
     private Collision collision;
+    private Brick[] bricks;
+    private Picture picture;
+    private int lives;
+    private boolean moveBall;
+    private Picture menu;
+    private int init;
 
     public Board() {
 
+       // picture = new Picture(PADDING, PADDING, "path");
+       // picture.draw();
+
         Rectangle grid = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
         grid.draw();
+
         this.paddle = new Paddle();
         this.ball = new Ball(paddle);
-        this.collision = new Collision(ball,paddle);
+        this.collision = new Collision();
+        this.bricks = BrickFactory.CreateBricks(200);
+        this.moveBall = false;
+        this.lives = 4;
+        this.init = 0;
     }
 
     public void start() {
 
-        while (true) {
+        while (lives > 0) {
+
+            if (moveBall) {
+                continue;
+            }
             try {
+                if (ball.getY() + ball.getDIAMETER() >= Board.HEIGHT) {
+                    lives--;
+                    ball.reset();
+                    paddle.reset();
+                    Thread.sleep(1000);
+                    continue;
+                }
                 paddle.move();
                 ball.move(collision);
+                collision.checkBallBrick(ball, bricks);
 
                 Thread.sleep(5);
-                //  System.out.println(ball.getPositionX()+" "+ball.getPositionY());
-            } catch (InterruptedException e) {
 
+            } catch (InterruptedException e) {
             }
         }
     }
 
+
     public Paddle getPaddle() {
         return paddle;
+    }
+
+    public void setMoveBall() {
+        init--;
+        if (!moveBall) {
+            this.moveBall = true;
+        } else {
+            this.moveBall = false;
+        }
     }
 }
