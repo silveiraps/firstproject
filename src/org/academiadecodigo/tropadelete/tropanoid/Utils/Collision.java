@@ -33,7 +33,7 @@ public class Collision {
             boolean insideX = righCheck && lefCheck;
             boolean insideY = upCheck && downCheck;
 
-            if (insideX && downCheck) {
+            if (insideX && insideY) {
 
                 if (!bricks[i].isDestroyed()) {
 
