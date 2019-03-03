@@ -38,7 +38,7 @@ public class Board {
         this.collision = new Collision();
         this.bricks = BrickFactory.CreateBricks(200);
         this.moveBall = false;
-        this.lives = 1;
+        this.lives = 4;
         this.init = 0;
     }
 
@@ -89,5 +89,15 @@ public class Board {
         } else {
             this.moveBall = false;
         }
+    }
+
+    public boolean checkBricksAlive(Brick[] bricks) {
+
+        for (int i = 0; i < bricks.length; i++) {
+            if (bricks[i].getLife() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

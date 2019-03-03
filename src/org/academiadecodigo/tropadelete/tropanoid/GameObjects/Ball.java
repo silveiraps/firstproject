@@ -37,13 +37,13 @@ public class Ball extends GameObject {
         double prevX = ball.getX();
         double prevY = ball.getY();
 
-        if (ball.getX() < Board.PADDING || ball.getX() + DIAMETER > Board.WIDTH + Board.PADDING - 1) {
+        if (((ball.getX() < Board.PADDING) && (deltaX < 0)) ||
+                ((ball.getX() + DIAMETER > Board.WIDTH + Board.PADDING - 1) && deltaX > 0)) {
 
             this.direction = direction.getOppositeX();
             updateDeltas();
         }
-
-        if (ball.getY() <= Board.PADDING || ball.getY() >= Board.HEIGHT) {
+        if ((ball.getY() <= Board.PADDING) && deltaY < 0) {
 
             this.direction = direction.getOppositeY();
             updateDeltas();
@@ -55,7 +55,6 @@ public class Ball extends GameObject {
         ball.translate(x - prevX, y - prevY);
         collision.checkBallPaddle(this, paddle);
         show();
-
     }
 
     public void show() {

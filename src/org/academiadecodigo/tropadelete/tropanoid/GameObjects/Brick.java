@@ -12,6 +12,7 @@ public class Brick {
     private int posY;
     private boolean isDestroyed;
     private double changeBallSpeed;
+    private int life;
 
     public Brick(int posX, int posY, Color color) {
 
@@ -19,7 +20,12 @@ public class Brick {
         this.posY = posY;
         brick = new Picture(posX,posY, randomBrick());
         this.isDestroyed = false;
-        showBrick();
+        this.life = (int) (Math.random() * 4);
+        if (life == 0) {
+            isDestroyed = true;
+        } else {
+            showBrick();
+        }
 
     }
 
@@ -76,6 +82,14 @@ public class Brick {
 
     public void setDestroyed() {
         isDestroyed = true;
+    }
+
+    public void reduceLife() {
+        this.life--;
+    }
+
+    public int getLife() {
+        return life;
     }
 
     public double getChangeBallSpeed() {
