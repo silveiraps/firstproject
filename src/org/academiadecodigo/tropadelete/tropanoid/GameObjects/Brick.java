@@ -5,12 +5,13 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Brick {
 
-    private static final int WIDTH = 47;
+    private static final int WIDTH = 48;
     private static final int HEIGHT = 15;
     private Picture brick;
     private int posX;
     private int posY;
     private boolean isDestroyed;
+    private double changeBallSpeed;
 
     public Brick(int posX, int posY, Color color) {
 
@@ -39,13 +40,16 @@ public class Brick {
         int randomNumber = (int) (Math.random() * 3);
 
         if (randomNumber == 0) {
+            this.changeBallSpeed = 1;
             return brickOne;
         }
 
         if (randomNumber == 1) {
+            this.changeBallSpeed = 1.5;
             return brickTwo;
         }
 
+        this.changeBallSpeed = 2;
         return brickThree;
 
     }
@@ -74,4 +78,7 @@ public class Brick {
         isDestroyed = true;
     }
 
+    public double getChangeBallSpeed() {
+        return changeBallSpeed;
+    }
 }

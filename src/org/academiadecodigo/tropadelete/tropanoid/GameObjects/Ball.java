@@ -39,11 +39,10 @@ public class Ball extends GameObject {
 
         if (ball.getX() < Board.PADDING || ball.getX() + DIAMETER > Board.WIDTH + Board.PADDING - 1) {
 
-
             this.direction = direction.getOppositeX();
             updateDeltas();
-
         }
+
         if (ball.getY() <= Board.PADDING || ball.getY() >= Board.HEIGHT) {
 
             this.direction = direction.getOppositeY();
@@ -88,5 +87,9 @@ public class Ball extends GameObject {
 
     public double getDeltaY() {
         return deltaY;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 }

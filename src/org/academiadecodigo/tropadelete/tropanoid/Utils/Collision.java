@@ -26,19 +26,19 @@ public class Collision {
 
             boolean upCheck = ballLowerLimit >= brickUp;
             boolean lefCheck = ballRightLimit >= brickLeft;
-            boolean righCheck = ballLeftLimit <= brickRight;
+            boolean rightCheck = ballLeftLimit <= brickRight;
             boolean downCheck = ballUpperLimit <= brickDown;
 
 
-            boolean insideX = righCheck && lefCheck;
+            boolean insideX = rightCheck && lefCheck;
             boolean insideY = upCheck && downCheck;
 
             if (insideX && insideY) {
 
                 if (!bricks[i].isDestroyed()) {
 
+                    ball.setSpeed(bricks[i].getChangeBallSpeed());
                     bricks[i].setDestroyed();
-
                     bricks[i].hideBrick();
 
                     ball.setDirection(ball.getDirection().getOppositeY());

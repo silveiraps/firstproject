@@ -38,7 +38,7 @@ public class Board {
         this.collision = new Collision();
         this.bricks = BrickFactory.CreateBricks(200);
         this.moveBall = false;
-        this.lives = 4;
+        this.lives = 1;
         this.init = 0;
     }
 
@@ -58,6 +58,7 @@ public class Board {
                     if (lives == 0) {
                         Picture gameOver = new Picture(PADDING, PADDING * 20, "tropanoid_graphics_gameover.png");
                         gameOver.draw();
+                        return;
                     }
 
                     ball.reset();
