@@ -70,6 +70,7 @@ public class Collision {
         if(bricks[i].getLife()==0) {
             bricks[i].setDestroyed();
             bricks[i].hideBrick();
+            bricks[i].getDestroyBrick().play(true);
             return;
         }
         bricks[i].getBrickHit().play(true);

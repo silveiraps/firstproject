@@ -21,7 +21,7 @@ public class Ball extends GameObject {
     public Ball(Paddle paddle) {
 
         this.paddle = paddle;
-        x = (Board.WIDTH - DIAMETER) / 2;
+        x = Board.WIDTH  / 2 +Board.PADDING -DIAMETER/2;
         y = Board.PADDLE_Y - DIAMETER;
         speed = 1;
 

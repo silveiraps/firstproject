@@ -1,6 +1,5 @@
 package org.academiadecodigo.tropadelete.tropanoid;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
@@ -39,9 +38,9 @@ public class Board {
     }
 
     public void start() {
-startFx.readyGoText();
+        startFx.readyGoText();
         while (lives > 0 || checkBricksAlive(bricks)) {
-            System.out.println("");
+            System.out.print("");
             if (!moveBall) {
                 continue;
             }
@@ -57,7 +56,7 @@ startFx.readyGoText();
 
                     ball.reset();
                     paddle.reset();
-                    Thread.sleep(1000);
+                    setMoveBall();
                     continue;
                 }
                 paddle.move();

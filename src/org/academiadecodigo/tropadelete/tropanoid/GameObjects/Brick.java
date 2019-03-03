@@ -30,7 +30,7 @@ public class Brick {
             showBrick();
         }
         this.brickHit = new Sound("/brickhit.wav");
-        //this.destroyBrick = new Sound("")
+        this.destroyBrick = new Sound("/brickexplosion.wav");
 
     }
 
@@ -103,5 +103,9 @@ public class Brick {
 
     public Sound getBrickHit() {
         return brickHit;
+    }
+
+    public Sound getDestroyBrick() {
+        return destroyBrick;
     }
 }

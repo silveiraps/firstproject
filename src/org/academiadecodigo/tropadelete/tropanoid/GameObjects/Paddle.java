@@ -19,7 +19,7 @@ public class Paddle extends GameObject {
         deltaX = 1;
         speed=3;
 
-        x = (Board.WIDTH +Board.PADDING)/ 2 - imageWidth / 2;
+        x = (Board.WIDTH )/ 2+Board.PADDING - imageWidth / 2;
         y = Board.PADDLE_Y;
 
         paddleHit = new Sound("/paddlehit.wav");
