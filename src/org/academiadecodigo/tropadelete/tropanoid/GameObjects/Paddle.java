@@ -1,6 +1,6 @@
 package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.tropadelete.tropanoid.Utils.Sound;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.tropanoid.Board;
 import org.academiadecodigo.tropadelete.tropanoid.Utils.PaddleDirection;
@@ -11,6 +11,7 @@ public class Paddle extends GameObject {
     private int deltaX;
     private Picture paddle;
     private int speed;
+    private Sound paddleHit;
 
     public Paddle() {
         imageWidth = 80;
@@ -21,8 +22,11 @@ public class Paddle extends GameObject {
         x = (Board.WIDTH +Board.PADDING)/ 2 - imageWidth / 2;
         y = Board.PADDLE_Y;
 
+        paddleHit = new Sound("/paddlehit.wav");
+
         paddle = new Picture(x, y, "tropanoid_graphics_paddle.png");
         show();
+
     }
 
     public void move() {
@@ -62,5 +66,9 @@ public class Paddle extends GameObject {
     public void reset() {
         paddle.translate((Board.WIDTH +Board.PADDING)/ 2 - imageWidth / 2-x,0);
         x = paddle.getX();
+    }
+
+    public Sound getPaddleHit() {
+        return paddleHit;
     }
 }

@@ -39,20 +39,15 @@ public class KeyboardListener implements KeyboardHandler {
         leftR.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         keyboard.addEventListener(leftR);
 
-        KeyboardEvent up = new KeyboardEvent();
-        up.setKey(KeyboardEvent.KEY_UP);
-        up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(up);
-
-        KeyboardEvent down = new KeyboardEvent();
-        down.setKey(KeyboardEvent.KEY_DOWN);
-        down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(down);
-
         KeyboardEvent space = new KeyboardEvent();
         space.setKey(KeyboardEvent.KEY_SPACE);
         space.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(space);
+
+        KeyboardEvent q = new KeyboardEvent();
+        q.setKey(KeyboardEvent.KEY_Q);
+        q.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(q);
     }
 
     @Override
@@ -68,16 +63,13 @@ public class KeyboardListener implements KeyboardHandler {
                 this.paddle.setDirection(PaddleDirection.RIGHT);
                 break;
 
-            case KeyboardEvent.KEY_UP:
-
-                break;
-
-            case KeyboardEvent.KEY_DOWN:
-
-                break;
-
             case KeyboardEvent.KEY_SPACE:
                 this.board.setMoveBall();
+                break;
+
+            case KeyboardEvent.KEY_Q:
+                System.exit(0);
+
         }
     }
 

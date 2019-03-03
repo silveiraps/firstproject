@@ -3,8 +3,11 @@ package org.academiadecodigo.tropadelete.tropanoid.Utils;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
+import org.academiadecodigo.tropadelete.tropanoid.Utils.Sound;
 
 public class Collision {
+
+
 
     public void checkBallBrick(Ball ball, Brick[] bricks) {
 
@@ -41,6 +44,8 @@ public class Collision {
 
                 if (insideX && insideY) {
 
+                    bricks[i].getBrickHit().play(true);
+
                     if(ballAbove || ballBelow) {
                         ball.setDirection(ball.getDirection().getOppositeY());
 
@@ -65,7 +70,9 @@ public class Collision {
         if(bricks[i].getLife()==0) {
             bricks[i].setDestroyed();
             bricks[i].hideBrick();
+            return;
         }
+        bricks[i].getBrickHit().play(true);
 
     }
 
@@ -107,6 +114,7 @@ public class Collision {
 
             ball.setDirection(ball.getDirection().getOppositeY());
             ball.updateDeltas();
+            paddle.getPaddleHit().play(true);
         }
 
     }

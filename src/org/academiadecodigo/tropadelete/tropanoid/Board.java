@@ -22,13 +22,9 @@ public class Board {
     private Picture board;
     private int lives;
     private boolean moveBall;
-    private Picture menu;
-    private int init;
+    private GameStartFX startFx;
 
     public Board() {
-
-       // picture = new Picture(PADDING, PADDING, "path");
-       // picture.draw();
 
         this.board = new Picture(PADDING, PADDING, "tropanoid_graphics_board.png");
         board.draw();
@@ -39,16 +35,14 @@ public class Board {
         this.bricks = BrickFactory.CreateBricks(200);
         this.moveBall = false;
         this.lives = 4;
-        this.init = 0;
+        startFx = new GameStartFX();
     }
 
     public void start() {
-
-
-
-        while (lives > 0) {
-
-            if (moveBall) {
+startFx.readyGoText();
+        while (lives > 0 || checkBricksAlive(bricks)) {
+            System.out.println("");
+            if (!moveBall) {
                 continue;
             }
             try {
@@ -83,7 +77,7 @@ public class Board {
     }
 
     public void setMoveBall() {
-        init--;
+
         if (!moveBall) {
             this.moveBall = true;
         } else {

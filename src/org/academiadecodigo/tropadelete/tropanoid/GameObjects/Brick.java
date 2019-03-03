@@ -2,6 +2,7 @@ package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.tropadelete.tropanoid.Utils.Sound;
 
 public class Brick {
 
@@ -13,6 +14,8 @@ public class Brick {
     private boolean isDestroyed;
     private double changeBallSpeed;
     private int life;
+    private Sound brickHit;
+    private Sound destroyBrick;
 
     public Brick(int posX, int posY, Color color) {
 
@@ -26,6 +29,8 @@ public class Brick {
         } else {
             showBrick();
         }
+        this.brickHit = new Sound("/brickhit.wav");
+        //this.destroyBrick = new Sound("")
 
     }
 
@@ -94,5 +99,9 @@ public class Brick {
 
     public double getChangeBallSpeed() {
         return changeBallSpeed;
+    }
+
+    public Sound getBrickHit() {
+        return brickHit;
     }
 }
