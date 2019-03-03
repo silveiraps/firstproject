@@ -1,6 +1,5 @@
 package org.academiadecodigo.tropadelete.tropanoid.Utils;
 
-import org.academiadecodigo.tropadelete.tropanoid.Board;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
@@ -9,11 +8,12 @@ public class Collision {
 
     public void checkBallBrick(Ball ball, Brick[] bricks) {
 
-        double ballUpperLimit = ball.getY();
-        double ballLeftLimit = ball.getX();
-        double ballRightLimit = ball.getX() + ball.getDIAMETER();
-        double ballLowerLimit = ball.getY() + ball.getDIAMETER();
-
+        double ballUp = ball.getY();
+        double ballLeft = ball.getX();
+        double ballRight = ball.getX() + ball.getDIAMETER();
+        double ballDown = ball.getY() + ball.getDIAMETER();
+        double ballCenterX = ball.getX() + ball.getDIAMETER() / 2;
+        double ballCenterY = ball.getY() + ball.getDIAMETER() / 2;
 
         for (int i = 0; i < bricks.length; i++) {
 
@@ -23,29 +23,51 @@ public class Collision {
             double brickRight = bricks[i].getPosX() + Brick.getWIDTH();
 
 
+            boolean upCheck = ballDown >= brickUp;
+            boolean lefCheck = ballRight >= brickLeft;
+            boolean righCheck = ballLeft <= brickRight;
+            boolean downCheck = ballUp <= brickDown;
 
-            boolean upCheck = ballLowerLimit >= brickUp;
-            boolean lefCheck = ballRightLimit >= brickLeft;
-            boolean righCheck = ballLeftLimit <= brickRight;
-            boolean downCheck = ballUpperLimit <= brickDown;
+            boolean ballBelow = ballCenterY > brickDown;
+            boolean ballAbove = ballCenterY < brickUp;
+            boolean ballAtLeft = ballCenterX < ballRight;
+            boolean ballAtRight = ballCenterX > brickLeft;
 
 
             boolean insideX = righCheck && lefCheck;
             boolean insideY = upCheck && downCheck;
 
-            if (insideX && insideY) {
+            if (!bricks[i].isDestroyed()) {
 
-                if (!bricks[i].isDestroyed()) {
+                if (insideX && insideY) {
 
-                    bricks[i].setDestroyed();
 
-                    bricks[i].hideBrick();
+                    if(ballAbove || ballBelow) {
+                        ball.setDirection(ball.getDirection().getOppositeY());
 
-                    ball.setDirection(ball.getDirection().getOppositeY());
-                    ball.updateDeltas();
+                        changeBrickLife(ball,bricks,i);
+                        break;
+                    }
+                    if (ballAtLeft || ballAtRight) {
+                        ball.setDirection(ball.getDirection().getOppositeX());
+
+                        changeBrickLife(ball,bricks,i);
+                        break;
+                    }
                 }
             }
         }
+    }
+    public void changeBrickLife(Ball ball,Brick[] bricks, int i) {
+        ball.updateDeltas();
+        ball.setSpeed();
+        bricks[i].reduceLife();
+
+        if(bricks[i].getLife()==0) {
+            bricks[i].setDestroyed();
+            bricks[i].hideBrick();
+        }
+
     }
 
     public void checkBallPaddle(Ball ball, Paddle paddle) {
@@ -55,21 +77,15 @@ public class Collision {
         double paddleLeftLimit = paddle.getX();
         double paddleRightLimit = paddle.getX() + paddle.getImageWidth();
 
-        double ballCenterX = ball.getX() + ball.getDIAMETER() / 2;
-        double ballCenterY = ball.getY() + ball.getDIAMETER() / 2;
-
         double ballUpperLimit = ball.getY();
         double ballLowerLimit = ball.getY() + ball.getDIAMETER();
-
         double ballLeftLimit = ball.getX();
         double ballRightLimit = ball.getX() + ball.getDIAMETER();
-
 
         boolean upSide = ballLowerLimit >= paddleUpperLimit;
         boolean leftSide = ballRightLimit >= paddleLeftLimit;
         boolean rightSide = ballLeftLimit <= paddleRightLimit;
         boolean downSide = ballUpperLimit <= paddleLowerLimit;
-
 
 
         if ((upSide && downSide && leftSide && rightSide)) {
@@ -84,17 +100,14 @@ public class Collision {
 
                 ball.setDirection(ball.getDirection().getNext(1));
             }
-
             if (paddleBallDelta >= (paddle.getImageWidth() + ball.getDIAMETER()) * 0.5 &&
                     paddleBallDelta <= (paddle.getImageWidth() + ball.getDIAMETER())) {
 
                 ball.setDirection(ball.getDirection().getNext(-1));
-
             }
 
             ball.setDirection(ball.getDirection().getOppositeY());
             ball.updateDeltas();
-
         }
 
     }

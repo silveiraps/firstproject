@@ -12,17 +12,22 @@ public class Brick {
     private int posY;
     private Color color;
     private boolean isDestroyed;
+    private int life;
 
     public Brick(int posX, int posY, Color color) {
 
         this.posX = posX;
         this.posY = posY;
-        rectangle = new Rectangle(posX,posY, WIDTH, HEIGHT);
+        rectangle = new Rectangle(posX, posY, WIDTH, HEIGHT);
         rectangle.setColor(color);
         this.color = color;
         this.isDestroyed = false;
-        showBrick();
-
+        this.life = (int) (Math.random() * 4);
+        if (life == 0) {
+            isDestroyed = true;
+        } else {
+            showBrick();
+        }
     }
 
     public void showBrick() {
@@ -49,11 +54,6 @@ public class Brick {
         return HEIGHT;
     }
 
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public boolean isDestroyed() {
         return isDestroyed;
     }
@@ -62,4 +62,11 @@ public class Brick {
         isDestroyed = true;
     }
 
+    public void reduceLife() {
+        this.life--;
+    }
+
+    public int getLife() {
+        return life;
+    }
 }

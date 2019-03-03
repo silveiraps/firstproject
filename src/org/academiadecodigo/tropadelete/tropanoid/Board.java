@@ -23,12 +23,11 @@ public class Board {
     private int lives;
     private boolean moveBall;
     private Picture menu;
-    private int init;
 
     public Board() {
 
-       // picture = new Picture(PADDING, PADDING, "path");
-       // picture.draw();
+        picture = new Picture(PADDING, PADDING, "path");
+        picture.draw();
 
         Rectangle grid = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
         grid.draw();
@@ -39,14 +38,15 @@ public class Board {
         this.bricks = BrickFactory.CreateBricks(200);
         this.moveBall = false;
         this.lives = 4;
-        this.init = 0;
     }
 
+    //game logic
     public void start() {
 
-        while (lives > 0) {
+        while (lives > 0 || checkBricksAlive(bricks)) {
 
-            if (moveBall) {
+            System.out.print("");
+            if (!moveBall) {
                 continue;
             }
             try {
@@ -54,7 +54,7 @@ public class Board {
                     lives--;
                     ball.reset();
                     paddle.reset();
-                    Thread.sleep(1000);
+                    setMoveBall();
                     continue;
                 }
                 paddle.move();
@@ -74,11 +74,21 @@ public class Board {
     }
 
     public void setMoveBall() {
-        init--;
+
         if (!moveBall) {
             this.moveBall = true;
         } else {
             this.moveBall = false;
+        }
+    }
+
+    public boolean checkBricksAlive(Brick[] bricks) {
+
+        for (int i = 0; i < bricks.length; i++) {
+            if (bricks[i].getLife() > 0) {
+                return true;
+            }
+            return false;
         }
     }
 }
