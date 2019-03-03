@@ -16,6 +16,7 @@ public class Board {
     private Ball ball;
     private Brick[] bricks;
     private Collision collision;
+    private Picture menu;
 
 
     public Board() {
@@ -25,12 +26,16 @@ public class Board {
         this.ball = new Ball();
         this.collision = new Collision(ball,paddle);
         this.bricks = BrickFactory.CreateBricks(50);
+        this.menu = new Picture(10,10,"tropanoid_graphics_menu.png");
     }
 
     public void start() {
 
         while (true) {
             try {
+
+                menu.draw();
+                Thread.sleep(1000);
                 paddle.move();
                 ball.move();
                 collision.check();

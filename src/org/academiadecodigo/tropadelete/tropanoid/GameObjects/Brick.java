@@ -32,21 +32,21 @@ public class Brick {
 
     public String randomBrick() {
 
-        String brickOne = "brick.png";
-        String brickTwo = "brick1.png";
-        String brickThree = "brick2.png";
+        String brickOne = "tropanoid_graphics_brick1.png";
+        String brickTwo = "tropanoid_graphics_brick2.png";
+        String brickThree = "tropanoid_graphics_brick3.png";
 
-        int randomNumber = (int) (Math.random() * 10);
+        int randomNumber = (int) (Math.random() * 3);
 
-        if (randomNumber <= 3) {
+        if (randomNumber == 0) {
             return brickOne;
         }
 
-        if (randomNumber > 3 && randomNumber <= 6) {
+        if (randomNumber == 1) {
             return brickTwo;
         }
 
-        if (randomNumber > 6) {
+        if (randomNumber == 2) {
             return brickThree;
         }
         return null;

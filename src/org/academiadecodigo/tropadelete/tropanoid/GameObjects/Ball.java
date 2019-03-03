@@ -21,7 +21,7 @@ public class Ball extends GameObjects {
         speedX = (int) Math.ceil(Math.random() * 3);
         speedY = -1;
 
-        ball = new Picture(positionX, positionY, "ball.png");
+        ball = new Picture(positionX, positionY, "tropanoid_graphics_ball.png");
         show();
     }
 
