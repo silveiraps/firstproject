@@ -3,24 +3,51 @@ package org.academiadecodigo.tropadelete.tropanoid.GameObjects;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.tropadelete.tropanoid.Board;
-import org.academiadecodigo.tropadelete.tropanoid.Direction;
+import org.academiadecodigo.tropadelete.tropanoid.Utils.PaddleDirection;
 
-public class Paddle extends GameObjects {
+public class Paddle extends GameObject {
 
-    private static final int WIDTH = 80;
-    private static final int HEIGHT = 5;
+    private PaddleDirection direction;
+    private int deltaX;
     private Picture paddle;
-    private Direction direction;
-    private int positionX;
-    private int positionY;
+    private int speed;
 
     public Paddle() {
+        imageWidth = 80;
+        imageHeight = 10;
+        deltaX = 1;
+        speed=3;
 
-        positionX = Board.getWIDTH() / 2 - WIDTH / 2;
-        positionY = Board.getHEIGHT();
+        x = (Board.WIDTH +Board.PADDING)/ 2 - imageWidth / 2;
+        y = Board.PADDLE_Y;
 
-        this.paddle = new Picture(positionX, positionY, "tropanoid_graphics_paddle.png");
+        paddle = new Picture(x, y, "tropanoid_graphics_paddle.png");
+        show();
+    }
 
+    public void move() {
+
+        if (direction == PaddleDirection.LEFT) {
+
+            paddle.translate(-deltaX*speed,0);
+
+            if (paddle.getX() < Board.PADDING) {
+
+                paddle.translate(deltaX*speed,0);
+            }
+            x = paddle.getX();
+        }
+
+        if (direction == PaddleDirection.RIGHT) {
+
+             paddle.translate(deltaX*2,0);
+
+            if (paddle.getX() + imageWidth >= Board.WIDTH + Board.PADDING) {
+
+                paddle.translate(-deltaX*2,0);
+            }
+            x = paddle.getX();
+        }
         show();
     }
 
@@ -28,87 +55,12 @@ public class Paddle extends GameObjects {
         paddle.draw();
     }
 
-    public void move() throws InterruptedException {
-
-
-
-        if (direction == Direction.LEFT) {
-            this.positionX=paddle.getX();
-
-            if (paddle.getX() <= Board.PADDING) {
-                return;
-            }
-            paddle.translate(-5, 0);
-        }
-        if (direction == Direction.RIGHT) {
-            this.positionX=paddle.getX();
-
-            if (paddle.getX()+ WIDTH >= Board.getWIDTH()+Board.PADDING) {
-                return;
-            }
-            paddle.translate(5, 0);
-        }
-
-        /*if (direction == Direction.LEFT && paddle.getX() > Board.PADDING) {
-            paddle.translate(-10, 0);
-
-            Thread.sleep(1);
-        }
-        if (direction == Direction.RIGHT && paddle.getX() + WIDTH < Board.getWIDTH()) {
-            paddle.translate(10, 0);
-
-            Thread.sleep(1);
-        }
-        if (direction == null) {
-
-        }*/
-       /* if (direction == Direction.LEFT) {
-
-            if (paddle.getX() <= Board.PADDING) {
-                return;
-            }
-
-            paddle.translate(-10, 0);
-
-        }
-        if (direction == Direction.RIGHT) {
-
-            if (paddle.getX()+ WIDTH >= Board.getWIDTH()) {
-                return;
-            }
-
-            paddle.translate(10, 0);
-        }
-        if (direction == null) {
-
-        }*/
-        //Thread.sleep();
-        show();
-    }
-
-    public void setDirection(Direction direction) {
+    public void setDirection(PaddleDirection direction) {
 
         this.direction = direction;
     }
-
-    public Direction getDirection() {
-
-        return direction;
-    }
-
-    public Picture getPaddle() {
-        return paddle;
-    }
-
-    public int getPositionY() {
-        return paddle.getY();
-    }
-
-    public int getPositionX() {
-        return paddle.getX();
-    }
-
-    public int getWIDTH() {
-        return WIDTH;
+    public void reset() {
+        paddle.translate((Board.WIDTH +Board.PADDING)/ 2 - imageWidth / 2-x,0);
+        x = paddle.getX();
     }
 }
