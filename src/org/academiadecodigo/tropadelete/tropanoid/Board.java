@@ -35,7 +35,7 @@ public class Board {
         this.paddle = new Paddle();
         this.ball = new Ball(paddle);
         this.collision = new Collision();
-        this.bricks = BrickFactory.CreateBricks(200);
+        this.bricks = BrickFactory.CreateBricks(1);
         this.moveBall = false;
         this.lives = 4;
     }
@@ -88,7 +88,7 @@ public class Board {
             if (bricks[i].getLife() > 0) {
                 return true;
             }
-            return false;
         }
+        return false;
     }
 }
