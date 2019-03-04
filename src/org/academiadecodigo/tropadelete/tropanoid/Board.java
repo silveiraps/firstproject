@@ -6,6 +6,7 @@ import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 import org.academiadecodigo.tropadelete.tropanoid.Utils.BrickFactory;
 import org.academiadecodigo.tropadelete.tropanoid.Utils.Collision;
+import org.academiadecodigo.tropadelete.tropanoid.Utils.Sound;
 
 public class Board {
 
@@ -24,8 +25,11 @@ public class Board {
     private GameStartFX startFx;
     private Picture menu;
     private Picture gameOver;
-    private boolean onMenu;
     private boolean reStart;
+    private Sound lose1;
+    private Sound lose2;
+    private Sound lastLife;
+
 
     public Board() {
         menu = new Picture(PADDING, PADDING, "tropanoid_graphics_menu.png");
@@ -41,6 +45,11 @@ public class Board {
         reStart = false;
 
         startFx = new GameStartFX();
+
+        lose1= new Sound("/1no.wav");
+        lose2= new Sound("/nonono.wav");
+        lastLife = new Sound("/last_time.wav");
+
     }
 
     private Brick[] buildBricks() {
@@ -49,7 +58,7 @@ public class Board {
 
     public void start() {
 
-        while (lives > 0 || checkBricksAlive(bricks)) {
+        while (lives >= 0 || checkBricksAlive(bricks)) {
             System.out.print("");
             if (!moveBall) {
 
@@ -58,9 +67,17 @@ public class Board {
             try {
                 if (ball.getY() + ball.getDIAMETER() >= Board.HEIGHT) {
                     lives--;
-
+                    if(lives==3) {
+                        lose1.play(true);
+                    }
+                    if(lives==2) {
+                        lose2.play(true);
+                    }
+                    if(lives==1) {
+                        lastLife.play(true);
+                    }
                     if (lives == 0) {
-                        return;
+                        break;
                     }
 
                     ball.reset();
@@ -77,18 +94,16 @@ public class Board {
             } catch (InterruptedException e) {
             }
         }
-        setMoveBall();
+        System.out.println("fim");
         gameOver.draw();
+        setMoveBall();
+        while (!reStart) {
+        }
 
     }
-
 
     public Paddle getPaddle() {
         return paddle;
-    }
-
-    public void setReStart() {
-        this.reStart = true;
     }
 
     public void setMoveBall() {
@@ -132,18 +147,4 @@ public class Board {
         startFx.readyGoText();
         start();
     }
-
-    public void resetGame() {
-
-        for (int i = 0; i < bricks.length; i++) {
-            bricks[i].hideBrick();
-        }
-        gameOver.delete();
-        bricks = buildBricks();
-        ball.reset();
-        paddle.reset();
-
-        menu();
-    }
-
 }
