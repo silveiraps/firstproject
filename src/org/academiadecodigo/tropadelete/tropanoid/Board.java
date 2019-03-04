@@ -7,8 +7,6 @@ import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 import org.academiadecodigo.tropadelete.tropanoid.Utils.BrickFactory;
 import org.academiadecodigo.tropadelete.tropanoid.Utils.Collision;
 
-import java.awt.*;
-
 public class Board {
 
     public static final int WIDTH = 480;
@@ -25,20 +23,28 @@ public class Board {
     private boolean moveBall;
     private GameStartFX startFx;
     private Picture menu;
+    private Picture gameOver;
     private boolean onMenu;
-    private boolean start;
+    private boolean reStart;
 
     public Board() {
-        this.menu = new Picture(PADDING,PADDING,"tropanoid_graphics_menu.png");
-        this.board = new Picture(PADDING, PADDING, "tropanoid_graphics_board.png");
+        menu = new Picture(PADDING, PADDING, "tropanoid_graphics_menu.png");
+        board = new Picture(PADDING, PADDING, "tropanoid_graphics_board.png");
+        gameOver = new Picture(PADDING, PADDING * 20, "tropanoid_graphics_gameover.png");
 
-        this.paddle = new Paddle();
-        this.ball = new Ball(paddle);
-        this.collision = new Collision();
-        this.bricks = BrickFactory.CreateBricks(200);
-        this.moveBall = false;
-        this.lives = 4;
+        paddle = new Paddle();
+        ball = new Ball(paddle);
+        collision = new Collision();
+        bricks = buildBricks();
+        moveBall = false;
+        lives = 4;
+        reStart = false;
+
         startFx = new GameStartFX();
+    }
+
+    private Brick[] buildBricks() {
+        return BrickFactory.CreateBricks(200);
     }
 
     public void start() {
@@ -54,8 +60,6 @@ public class Board {
                     lives--;
 
                     if (lives == 0) {
-                        Picture gameOver = new Picture(PADDING, PADDING * 20, "tropanoid_graphics_gameover.png");
-                        gameOver.draw();
                         return;
                     }
 
@@ -73,11 +77,18 @@ public class Board {
             } catch (InterruptedException e) {
             }
         }
+        setMoveBall();
+        gameOver.draw();
+
     }
 
 
     public Paddle getPaddle() {
         return paddle;
+    }
+
+    public void setReStart() {
+        this.reStart = true;
     }
 
     public void setMoveBall() {
@@ -98,26 +109,41 @@ public class Board {
         }
         return false;
     }
+
     public void drawGame() {
         menu.delete();
         board.draw();
         for (int i = 0; i < bricks.length; i++) {
-            if(!bricks[i].isDestroyed()) {
+            if (!bricks[i].isDestroyed()) {
                 bricks[i].showBrick();
             }
         }
         ball.show();
         paddle.show();
     }
+
     public void menu() {
         menu.draw();
-        while(!moveBall) {
+        while (!moveBall) {
             System.out.print("");
             continue;
         }
         drawGame();
-
+        startFx.readyGoText();
         start();
+    }
+
+    public void resetGame() {
+
+        for (int i = 0; i < bricks.length; i++) {
+            bricks[i].hideBrick();
+        }
+        gameOver.delete();
+        bricks = buildBricks();
+        ball.reset();
+        paddle.reset();
+
+        menu();
     }
 
 }

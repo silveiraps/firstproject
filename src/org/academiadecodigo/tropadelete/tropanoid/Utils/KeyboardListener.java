@@ -48,6 +48,11 @@ public class KeyboardListener implements KeyboardHandler {
         q.setKey(KeyboardEvent.KEY_Q);
         q.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(q);
+
+        KeyboardEvent r = new KeyboardEvent();
+        r.setKey(KeyboardEvent.KEY_R);
+        r.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(r);
     }
 
     @Override
@@ -69,6 +74,11 @@ public class KeyboardListener implements KeyboardHandler {
 
             case KeyboardEvent.KEY_Q:
                 System.exit(0);
+                break;
+
+            case KeyboardEvent.KEY_R:
+                board.resetGame();
+                break;
 
         }
     }
