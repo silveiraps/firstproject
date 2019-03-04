@@ -29,7 +29,6 @@ public class Ball extends GameObject {
         updateDeltas();
 
         ball = new Picture(x, y, "tropanoid_graphics_ball_10.png");
-        show();
     }
 
     public void move(Collision collision) {

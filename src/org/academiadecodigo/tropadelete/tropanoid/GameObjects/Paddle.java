@@ -25,7 +25,6 @@ public class Paddle extends GameObject {
         paddleHit = new Sound("/paddlehit.wav");
 
         paddle = new Picture(x, y, "tropanoid_graphics_paddle.png");
-        show();
 
     }
 

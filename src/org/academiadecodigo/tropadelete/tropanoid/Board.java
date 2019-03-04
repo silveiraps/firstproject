@@ -7,6 +7,8 @@ import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
 import org.academiadecodigo.tropadelete.tropanoid.Utils.BrickFactory;
 import org.academiadecodigo.tropadelete.tropanoid.Utils.Collision;
 
+import java.awt.*;
+
 public class Board {
 
     public static final int WIDTH = 480;
@@ -22,11 +24,13 @@ public class Board {
     private int lives;
     private boolean moveBall;
     private GameStartFX startFx;
+    private Picture menu;
+    private boolean onMenu;
+    private boolean start;
 
     public Board() {
-
+        this.menu = new Picture(PADDING,PADDING,"tropanoid_graphics_menu.png");
         this.board = new Picture(PADDING, PADDING, "tropanoid_graphics_board.png");
-        board.draw();
 
         this.paddle = new Paddle();
         this.ball = new Ball(paddle);
@@ -38,10 +42,11 @@ public class Board {
     }
 
     public void start() {
-        startFx.readyGoText();
+
         while (lives > 0 || checkBricksAlive(bricks)) {
             System.out.print("");
             if (!moveBall) {
+
                 continue;
             }
             try {
@@ -93,4 +98,26 @@ public class Board {
         }
         return false;
     }
+    public void drawGame() {
+        menu.delete();
+        board.draw();
+        for (int i = 0; i < bricks.length; i++) {
+            if(!bricks[i].isDestroyed()) {
+                bricks[i].showBrick();
+            }
+        }
+        ball.show();
+        paddle.show();
+    }
+    public void menu() {
+        menu.draw();
+        while(!moveBall) {
+            System.out.print("");
+            continue;
+        }
+        drawGame();
+
+        start();
+    }
+
 }

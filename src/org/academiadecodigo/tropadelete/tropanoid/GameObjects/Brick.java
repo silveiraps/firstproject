@@ -26,8 +26,6 @@ public class Brick {
         this.life = (int) (Math.random() * 4);
         if (life == 0) {
             isDestroyed = true;
-        } else {
-            showBrick();
         }
         this.brickHit = new Sound("/brickhit.wav");
         this.destroyBrick = new Sound("/brickexplosion.wav");
