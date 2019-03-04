@@ -25,7 +25,6 @@ public class Board {
     private GameStartFX startFx;
     private Picture menu;
     private Picture gameOver;
-    private boolean reStart;
     private Sound lose1;
     private Sound lose2;
     private Sound lastLife;
@@ -42,7 +41,7 @@ public class Board {
         bricks = buildBricks();
         moveBall = false;
         lives = 4;
-        reStart = false;
+
 
         startFx = new GameStartFX();
 
@@ -94,10 +93,9 @@ public class Board {
             } catch (InterruptedException e) {
             }
         }
-        System.out.println("fim");
         gameOver.draw();
         setMoveBall();
-        while (!reStart) {
+        while (true) {
         }
 
     }
