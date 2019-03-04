@@ -16,7 +16,7 @@ public class GameStartFX {
         this.textReady = new Text(240, 320, "READY");
         this.textSet = new Text(240, 320, "SET");
         this.textGo = new Text(240, 320, "GO");
-        this.sound = new Sound("/02_hhavok-main.wav");
+        this.sound = new Sound("/resources/02_hhavok-main.wav");
     }
 
     public void readyGoText() {
