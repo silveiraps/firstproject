@@ -25,19 +25,22 @@ public class Board {
     private boolean moveBall;
     private GameStartFX startFx;
     private Picture menu;
+    private Picture livesPic;
+    private String source;
     private boolean onMenu;
     private boolean start;
 
     public Board() {
+        this.lives = 4;
         this.menu = new Picture(PADDING,PADDING,"tropanoid_graphics_menu.png");
         this.board = new Picture(PADDING, PADDING, "tropanoid_graphics_board.png");
-
+        this.livesPic = new Picture(PADDING,PADDING, "/4lifes.png");
         this.paddle = new Paddle();
         this.ball = new Ball(paddle);
         this.collision = new Collision();
         this.bricks = BrickFactory.CreateBricks(200);
         this.moveBall = false;
-        this.lives = 4;
+
         startFx = new GameStartFX();
     }
 
@@ -52,6 +55,8 @@ public class Board {
             try {
                 if (ball.getY() + ball.getDIAMETER() >= Board.HEIGHT) {
                     lives--;
+                    livesPic.load(livesImage());
+                    livesPic.draw();
 
                     if (lives == 0) {
                         Picture gameOver = new Picture(PADDING, PADDING * 20, "tropanoid_graphics_gameover.png");
@@ -108,6 +113,7 @@ public class Board {
         }
         ball.show();
         paddle.show();
+        livesPic.draw();
     }
     public void menu() {
         menu.draw();
@@ -118,6 +124,21 @@ public class Board {
         drawGame();
 
         start();
+    }
+
+    public String livesImage(){
+        String a="";
+        switch(lives){
+            case 4 : a="/4lifes.png";
+            break;
+            case 3: a ="/3lifes.png";
+            break;
+            case 2 : a="/2lifes.png";
+            break;
+            case 1 : a= "/1life.png";
+            break;
+        }
+         return  a;
     }
 
 }
