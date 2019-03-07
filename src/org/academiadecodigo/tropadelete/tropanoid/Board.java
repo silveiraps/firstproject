@@ -50,9 +50,6 @@ public class Board {
 
     }
 
-    private Brick[] buildBricks() {
-        return BrickFactory.CreateBricks(200);
-    }
 
     public void start() {
 
