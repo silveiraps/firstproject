@@ -135,7 +135,6 @@ public enum BallDirection {
                 }
             }
         }
-        System.out.println("getnext null");
         return null;
     }
 }

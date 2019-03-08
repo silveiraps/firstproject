@@ -27,8 +27,8 @@ public class Brick {
         if (life == 0) {
             isDestroyed = true;
         }
-        this.brickHit = new Sound("/brickhit.wav");
-        this.destroyBrick = new Sound("/brickexplosion.wav");
+        this.brickHit = new Sound("/resources/brickhit.wav");
+        this.destroyBrick = new Sound("/resources/brickexplosion.wav");
 
     }
 
@@ -42,9 +42,9 @@ public class Brick {
 
     public String randomBrick() {
 
-        String brickOne = "tropanoid_graphics_brick1.png";
-        String brickTwo = "tropanoid_graphics_brick2.png";
-        String brickThree = "tropanoid_graphics_brick3.png";
+        String brickOne = "resources/tropanoid_graphics_brick1.png";
+        String brickTwo = "resources/tropanoid_graphics_brick2.png";
+        String brickThree = "resources/tropanoid_graphics_brick3.png";
 
         int randomNumber = (int) (Math.random() * 3);
 

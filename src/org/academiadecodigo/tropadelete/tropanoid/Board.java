@@ -29,31 +29,40 @@ public class Board {
     private Sound lose2;
     private Sound lastLife;
     private Picture livesPic;
+    private Picture win;
 
 
     public Board() {
-        this.lives = 4;
-        this.menu = new Picture(PADDING,PADDING,"tropanoid_graphics_menu.png");
-        this.board = new Picture(PADDING, PADDING, "tropanoid_graphics_board.png");
-        this.livesPic = new Picture(PADDING,PADDING, "/4lifes.png");
-        this.paddle = new Paddle();
-        this.ball = new Ball(paddle);
-        this.collision = new Collision();
-        this.bricks = BrickFactory.CreateBricks(200);
-        this.moveBall = false;
+        menu = new Picture(PADDING, PADDING, "resources/tropanoid_graphics_menu.png");
+        board = new Picture(PADDING, PADDING, "resources/tropanoid_graphics_board.png");
+        gameOver = new Picture(PADDING, PADDING * 20, "resources/tropanoid_graphics_gameover.png");
+        win = new Picture(PADDING, PADDING * 20, "resources/tropanoid_graphics_win.png");
+        paddle = new Paddle();
+        ball = new Ball(paddle);
+        collision = new Collision();
+        bricks = buildBricks();
+        moveBall = false;
+        lives = 4;
+        livesPic = new Picture(PADDING, PADDING, "resources/4lifes.png");
 
         startFx = new GameStartFX();
 
-        lose1= new Sound("/1no.wav");
-        lose2= new Sound("/nonono.wav");
-        lastLife = new Sound("/last_time.wav");
+        lose1 = new Sound("/resources/1no.wav");
+        lose2 = new Sound("/resources/nonono.wav");
+        lastLife = new Sound("/resources/last_time.wav");
 
     }
 
+<<<<<<< HEAD
+=======
+    private Brick[] buildBricks() {
+        return BrickFactory.CreateBricks(160);
+    }
+>>>>>>> 799d3b9e1e4f157ed3993107f53d090b09f286e1
 
     public void start() {
 
-        while (lives >= 0 || checkBricksAlive(bricks)) {
+        while (checkBricksAlive(bricks)) {
             System.out.print("");
             if (!moveBall) {
 
@@ -63,15 +72,19 @@ public class Board {
                 if (ball.getY() + ball.getDIAMETER() >= Board.HEIGHT) {
                     lives--;
                     livesPic.load(livesImage());
+                    if (lives == 0) {
+                        livesPic.delete();
+                        break;
+                    }
                     livesPic.draw();
 
-                    if(lives==3) {
+                    if (lives == 3) {
                         lose1.play(true);
                     }
-                    if(lives==2) {
+                    if (lives == 2) {
                         lose2.play(true);
                     }
-                    if(lives==1) {
+                    if (lives == 1) {
                         lastLife.play(true);
                     }
                     if (lives == 0) {
@@ -92,12 +105,14 @@ public class Board {
             } catch (InterruptedException e) {
             }
         }
-        System.out.println("fim");
-        gameOver.draw();
         setMoveBall();
+        if (lives > 0) {
+            win.draw();
+        } else {
+            gameOver.draw();
+        }
         while (true) {
         }
-
     }
 
     public Paddle getPaddle() {
@@ -147,19 +162,25 @@ public class Board {
         start();
     }
 
-    public String livesImage(){
-        String a="";
-        switch(lives){
-            case 4 : a="/4lifes.png";
-            break;
-            case 3: a ="/3lifes.png";
-            break;
-            case 2 : a="/2lifes.png";
-            break;
-            case 1 : a= "/1life.png";
-            break;
+    public String livesImage() {
+        String a = "";
+        switch (lives) {
+            case 4:
+                a = "resources/4lifes.png";
+                break;
+            case 3:
+                a = "resources/3lifes.png";
+                break;
+            case 2:
+                a = "resources/2lifes.png";
+                break;
+            case 1:
+                a = "resources/1life.png";
+                break;
+            case 0:
+                a = "resources/1life.png";
         }
-         return  a;
+        return a;
     }
 
 }

@@ -22,9 +22,9 @@ public class Paddle extends GameObject {
         x = (Board.WIDTH )/ 2+Board.PADDING - imageWidth / 2;
         y = Board.PADDLE_Y;
 
-        paddleHit = new Sound("/paddlehit.wav");
+        paddleHit = new Sound("/resources/paddlehit.wav");
 
-        paddle = new Picture(x, y, "tropanoid_graphics_paddle.png");
+        paddle = new Picture(x, y, "resources/tropanoid_graphics_paddle.png");
 
     }
 

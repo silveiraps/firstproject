@@ -3,7 +3,6 @@ package org.academiadecodigo.tropadelete.tropanoid.Utils;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Ball;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Brick;
 import org.academiadecodigo.tropadelete.tropanoid.GameObjects.Paddle;
-import org.academiadecodigo.tropadelete.tropanoid.Utils.Sound;
 
 public class Collision {
 

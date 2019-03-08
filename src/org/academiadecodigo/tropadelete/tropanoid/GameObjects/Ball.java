@@ -28,7 +28,7 @@ public class Ball extends GameObject {
         direction = BallDirection.pick();
         updateDeltas();
 
-        ball = new Picture(x, y, "tropanoid_graphics_ball_10.png");
+        ball = new Picture(x, y, "resources/tropanoid_graphics_ball_10.png");
     }
 
     public void move(Collision collision) {
@@ -48,8 +48,8 @@ public class Ball extends GameObject {
             updateDeltas();
         }
 
-        x += deltaX * speed;
-        y += deltaY * speed;
+        x += deltaX * speed*1.5;
+        y += deltaY * speed*1.5;
 
         ball.translate(x - prevX, y - prevY);
         collision.checkBallPaddle(this, paddle);
